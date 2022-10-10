@@ -1,0 +1,181 @@
+{% extends 'base_sistema.html' %}
+{% load static %}
+
+{%block style%}
+<link rel="stylesheet" href="{% static 'css/form.css'%}">
+<link rel="stylesheet" href="{% static 'css/producao/recebimento.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal.css' %}">
+<link rel="stylesheet" href="{% static 'css/tabela.css'%}">
+
+
+
+<script type="text/javascript" src="{% static 'js/jquery.js'%}"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+<script src="{%static 'js/table.js'%}"></script>
+{%endblock%}
+
+{%block titulo_header%}Produção{%endblock%}
+
+{% block conteudoPrincipal%}
+
+
+    <div class="titulo">
+        <h2>Produção / Recebimento Leite</h2>
+    </div>
+
+    <div class="recebimentoLeite"> 
+
+        <div class="box-conteudo cont1">
+            <button class="botao" id="myBtn">Novo</button>
+            <form action="{% url 'recebimento-leite' %}" method="POST" class="form data">
+                {% csrf_token %}
+                <div class="busca">
+                    <label for="data">Periodo: </label>
+                    <input class="" id="data_inicio" type="date" value="{{data_inicio}}" name="data_inicio">
+                    <span class="center" style="margin: 0.5rem 1rem;">    à    </span>
+                    <input class="" id="data_fim" type="date" value="{{data_fim}}" name="data_fim">
+                    <span class="center" style="margin: 0.5rem 1rem;">    ou    </span>
+                    <select name="periodos" id="periodos">
+                        <option value=""></option>
+                        {% if periodos == 'ultima_semana' %}
+                            <option selected value="ultima_semana">Última Semana</option>
+                        {% else %}
+                            <option value="ultima_semana">Última Semana</option>
+                        {% endif %}
+
+                        {% if periodos == 'ultima_quinzena' %}
+                            <option selected value="ultima_quinzena">Última Quinzena</option>
+                        {% else %}
+                            <option value="ultima_quinzena">Última Quinzena</option>
+                        {% endif %}
+
+                        {% if periodos == 'mes_atual' %}
+                            <option selected value="mes_atual">Mês Atual</option>
+                        {% else %}
+                            <option value="mes_atual">Mês Atual</option>
+                        {% endif %}
+
+                        {% if periodos == 'mes_anterior' %}
+                            <option selected value="mes_anterior">Mês Anterior</option>
+                        {% else %}
+                            <option value="mes_anterior">Mês Anterior</option>
+                        {% endif %}
+
+                        {% if periodos == 'ultimo_trimestre' %}
+                            <option selected value="ultimo_trimestre">Último Trimestre</option>
+                        {% else %}
+                            <option value="ultimo_trimestre">Último Trimestre</option>
+                        {% endif %}
+
+                        {% if periodos == 'ultimo_semestre' %}
+                            <option selected value="ultimo_semestre">Último Semestre</option>
+                        {% else %}
+                            <option value="ultimo_semestre">Último Semestre</option>
+                        {% endif %}
+
+                        {% if periodos == 'ultimo_ano' %}
+                            <option selected value="ultimo_ano">Último Ano</option>
+                        {% else %}
+                            <option value="ultimo_ano">Último Ano</option>
+                        {% endif %}
+
+                    </select>
+                </div>
+                <button class="button" type="submit" name="filtro" value="filtro">Filtrar</button>
+            </form>
+
+
+            <h3 class="filtro">{{filtro}}</h3>
+            <div class="campo ">
+                <table class="tabela" id="tabela" style="width:100%">
+                    <thead>
+                        <tr>
+                            <td>Data</td>
+                            <td>Fornecedor</td>
+                            <td>Qnt (l)</td>
+                            <td>Preço (R$)</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for leite in leites%}
+                        <tr>
+                            <td>{{leite.get_data}}</td>
+                            <td>{{leite.fornecedor}}</td>
+                            <td class="litro-calculado">{{leite.quantidade}}</td>
+                            <td class="valor-calculado">R$ {{leite.valor}}</td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td id="total" class="bold"></td>
+                            <td></td>
+                            <td id="littotal" class="center bold"></td>
+                            <td id="qtdtotal" class="center bold"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+ 
+    </div>
+
+    <div id="myModal" class="modal">
+
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Inserir Recebimento de Leite</h2>
+          <form class="form" action="{% url 'recebimento-leite' %}" method="POST">
+            {% csrf_token %}
+            <div class="form__campo">
+                <label class="form__campo-label" for="data">Data</label>
+                <input class="form__campo-input" name="data" id="data" type="date">
+            </div>
+            <div class="form__campo">
+                <label class="form__campo-label" for="">Fornecedor</label>
+                <select class="form__campo-input" name="fornecedor" id="fornecedor">
+                    {% for fornecedor in fornecedores%}
+                        <option value="{{fornecedor}}">{{fornecedor}}</option>
+                    {%endfor%}
+                  </select>
+            </div>
+            <div class="form__campo">
+                <label class="form__campo-label" for="qnt">Quantidade</label>
+                <input class="form__campo-input" name="qnt" step="0.01" id="qnt" type="number">
+            </div>
+            <button type="submit" class="botao">Salvar</button>
+          </form>
+        </div>
+      
+      </div>
+
+      {% block js %}
+      <script src="{%static 'js/modal.js'%}"></script>
+      <script>
+            $('#tabela').on('draw.dt', function(){
+            var els = document.getElementsByClassName("valor-calculado");
+            var litros = document.getElementsByClassName('litro-calculado')
+            var total = 0
+            var valorcalculado = 0.0;
+            [].forEach.call(els, function (el)
+            {
+                var valor = el.innerHTML
+                valor = valor.replace(",", ".")
+                valor = valor.replace("R$ ", "")
+                valorcalculado += parseFloat(valor);
+            });
+            [].forEach.call(litros, function (el)
+            {
+                var litro = el.innerHTML
+                total+= parseInt(litro)
+            });
+
+            document.getElementById("qtdtotal").innerHTML = "R$ " + valorcalculado.toFixed(2);
+            document.getElementById("littotal").innerHTML = total
+            document.getElementById("total").innerHTML = "Total";
+            })
+          </script>
+      {%endblock%}
+
+{% endblock%}

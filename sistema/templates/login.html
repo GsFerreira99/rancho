@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login/login.css'%}">
+{% endblock %}
+ 
+{%block titulo_header%}Login{%endblock%}
+
+{% block conteudo %}
+    <main class="login">
+        <section class="icone">
+            <h1><img src="{% static 'img/logo.png' %}" alt="Logo Rancho Alere"></h1>
+        </section>
+        <section class="box">
+            <h2 class="box__titulo">Login</h2>
+            <div class="box__msg">
+                {% include 'partials/_mensagem.html'%}
+            </div>
+            <form class="form" method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="form__campo">
+                    <label class="form__campo-label" for="usuario">Usuario</label>
+                    <input class="form__campo-input" name="usuario" id="usuario" type="text" placeholder="Insira um usuario">
+                </div>
+                <div class="form__campo">
+                    <label class="form__campo-label" for="senha">Senha</label>
+                    <input class="form__campo-input" name="senha" id="senha" type="password" placeholder="Insira uma senha">
+                </div>
+                <button type="submit" class="form__botao">Entrar</button>
+            </form>
+        </section>
+    </main>
+
+{% endblock %}

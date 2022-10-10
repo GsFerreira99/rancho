@@ -1,0 +1,41 @@
+.box {
+    margin-bottom: 1rem;
+}
+
+.graficos {
+    width: 100%;
+    padding: 1rem;
+}
+
+
+@media screen and (min-width: 900px) {
+
+    .conteudos {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+    }
+    .box {
+        width: 42%;
+    }
+
+    .graficos {
+        width: 42%;
+        }
+
+}
+
+
+@media screen and (min-width: 1200px) {
+
+    .conteudos {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+    }
+
+}
+
+

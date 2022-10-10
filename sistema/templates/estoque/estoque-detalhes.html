@@ -1,0 +1,121 @@
+{% extends 'base_sistema.html' %}
+{% load static %}
+
+
+{%block style%}
+    <link rel="stylesheet" href="{% static 'css/form.css'%}">
+    <link rel="stylesheet" href="{% static 'css/tabela.css'%}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+
+    <script type="text/javascript" src="{% static 'js/jquery.js'%}"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script src="{%static 'js/table.js'%}"></script>
+
+    <link rel="stylesheet" href="{% static 'css/tabela.css'%}">
+{%endblock%}
+
+{%block titulo_header%}Detalhes{%endblock%}
+
+{% block conteudoPrincipal%}
+
+    <div class="titulo">
+        <h2><a class="link" href="{{estoque_url}}">Estoque</a> / Detalhes  </h2>
+    </div>
+
+    <section class="mainContent">
+
+        <div class="box-conteudo">
+            <div class="campo ">
+                <div class="detalhe-titulo">
+                    <h2 class="titulo_box">{{produto.nome}}</h2>
+                    <a class="link voltar" href="{% url 'estoque' %}">Voltar</a>
+
+                </div>
+
+
+                <form action="{% url 'estoque-detalhes' produto.id %}" method="POST" class="form">
+                    {% csrf_token %}
+                    <div>
+                        <label for="tipo">Tipo</label>
+                        <select id="tipo" name="tipo">
+                            <option></option>
+                            {% for tipo in tipos %}
+                            {% if tipo.nome == produto.tipo.nome %}
+                            <option selected>{{tipo.nome}}</option>
+                            {%else%}
+                            <option>{{tipo.nome}}</option>
+                            {%endif%}
+                            {%endfor%}
+                        </select>
+                    </div>
+                    <div>
+                        <label for="nome">Nome</label>
+                        <input id="nome" type="text" name="nome" value="{{produto.nome}}">
+                    </div>
+                    <div>
+                        <label for="categoria">Categoria</label>
+                        <select id="categoria" name="categoria">
+                            <option></option>
+                            {% for categoria in categorias %}
+                            {% if categoria.nome == produto.categoria.nome %}
+                            <option selected>{{categoria.nome}}</option>
+                            {%else%}
+                            <option>{{categoria.nome}}</option>
+                            {%endif%}
+                            {%endfor%}
+                        </select>
+                    </div>
+                    <div>
+                        <label for="marca">Marca</label>
+                        <select id="marca" name="marca">
+                            <option></option>
+                            {% for produto in marcas %}
+                            {% if produto.marca == produto.marca %}
+                            <option selected>{{produto.marca}}</option>
+                            {%else%}
+                            <option>{{produto.marca}}</option>
+                            {%endif%}
+                            {%endfor%}
+                        </select>
+                    </div>
+                    <div>
+                        <label for="unidade">Unidade</label>
+                        <select id="unidade" name="unidade">
+                            <option></option>
+                            {% for unidade in unidades %}
+                            {% if unidade == estoque.unidade %}
+                            <option selected>{{unidade}}</option>
+                            {%else%}
+                            <option>{{unidade}}</option>
+                            {%endif%}
+                            {%endfor%}
+                        </select>
+                    </div>
+                    <div>
+                        <label for="codBarras">Codigo de Barras</label>
+                        <input id="codBarras" type="number" step="1" name="codBarras" value="{{produto.codBarras}}">
+                    </div>
+                    <div>
+                        <label for="valCompra">Valor Compra</label>
+                        <input id="valCompra" type="text" name="valCompra" value="{{produto.valorCompra}}">
+                    </div>
+                    <div>
+                        <label for="valVenda">Valor Venda</label>
+                        <input id="valVenda" type="text" name="valVenda" value="{{produto.valorVenda}}">
+                    </div>
+    
+                    <button class="botao" type="submit" name="enviarForm" id="myBtn" >Salvar</button>
+                </form>
+
+            </div>
+        </div>
+
+    
+          {% block js %}
+          <script src="{%static 'js/modal.js'%}"></script>
+          {%endblock%}
+
+    </section>
+
+{%endblock%}

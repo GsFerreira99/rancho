@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static%}
+
+
+{%block head%}
+    <link rel="stylesheet" href="{% static 'css/toggle_menu.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base_sistema.css' %}">
+
+    {% block style%}
+
+    {%endblock%}
+{%endblock%}
+
+
+
+{%block conteudo%}
+
+{% url 'home' as home_url %}
+{% url 'logout' as logout_url %}
+{% url 'recebimento-leite' as recebimento_leite_url %}
+{% url 'producao-diaria' as producao_diaria_url %}
+{% url 'estoque' as estoque_url %}
+{% url 'clientes' as clientes_url %}
+{% url 'vendas' as venda_url %}
+{% url 'estoque-detalhes' as estoqueDetail_url %}
+{% url 'exibir_pdf' as exibir_pdf %}
+
+
+<header class="header">
+
+    <nav role="navigation">
+        <div id="menuToggle">
+          <input class="input" type="checkbox" />
+            <span></span>
+            <span></span>
+            <span></span>
+        <ul class="sidebar" id="menu">
+            <h2 class="sidebar__titulo"><a href="">Rancho Alere</a></h2>
+            
+            <li class="sidebar__item">
+                <a href="{{home_url}}">
+                    <p class="sidebar__item--texto">Home</p>
+                </a>
+
+
+            </li>
+            <li class="sidebar__item">
+                <input class="sidebar__item--check" type="checkbox">
+                <p class="sidebar__item--texto">Produção</p>
+
+                <ul class="sidebar__subitems">
+                    <li class="sidebar__subitems--item">
+                        <a  href="{{recebimento_leite_url}}">Recebimento Leite</a>
+                    </li>
+                    <li class="sidebar__subitems--item">
+                        <a  href="{{producao_diaria_url}}">Produção Diária</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="sidebar__item">
+                <input class="sidebar__item--check" type="checkbox">
+                <p class="sidebar__item--texto">Estoque</p>
+
+                <ul class="sidebar__subitems">
+                    <li class="sidebar__subitems--item">
+                        <a  href="{{estoque_url}}">Consultar Estoque</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="sidebar__item">
+                <input class="sidebar__item--check" type="checkbox">
+                <p class="sidebar__item--texto">Vendas</p>
+
+                <ul class="sidebar__subitems">
+                    <li class="sidebar__subitems--item">
+                        <a  href="{{venda_url}}">Consultar Vendas</a>
+                    </li>
+                    <li class="sidebar__subitems--item">
+                        <a  href="">Pedidos</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="sidebar__item">
+                <input class="sidebar__item--check" type="checkbox">
+                <p class="sidebar__item--texto">Compras</p>
+
+                <ul class="sidebar__subitems">
+                    <li class="sidebar__subitems--item">
+                        <a  href="">Consultar Compras</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="sidebar__item">
+                <input class="sidebar__item--check" type="checkbox">
+                <p class="sidebar__item--texto">Clientes/Fornecedores</p>
+
+                <ul class="sidebar__subitems">
+                    <li class="sidebar__subitems--item">
+                        <a  href="{{clientes_url}}">Consultar Clientes</a>
+                    </li>
+                    <li class="sidebar__subitems--item">
+                        <a  href="">Consultar Fornecedores</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="sidebar__item">
+                <input class="sidebar__item--check" type="checkbox">
+                <p class="sidebar__item--texto">Financeiro</p>
+
+                <ul class="sidebar__subitems">
+                    <li class="sidebar__subitems--item">
+                        <a  href="">Consultar</a>
+                    </li>
+
+                </ul>
+            </li>
+
+        </ul>
+       </div>
+      </nav>
+    
+    <a class="header__notify" href=""><img src="{% static 'img/sino.svg' %}" alt=""></a>
+    <button id="myUserBtn" class="btn_header_user">
+        <div class="header__user">
+            <img class="header__user--img" src="{% static 'img/user.svg' %}" alt="">
+            <div class="header__user--texto">
+                <p class="header__user--texto-nome">{{user.first_name}} {{user.last_name}}</p>
+                <p class="header__user--texto-funcao">{{request.user.groups.first}}</p>
+            </div>
+        </div>
+    </button>
+    <div class="user__info" id="myUserBox">
+        <div class="user-content">
+            <div id="triangulo-para-cima"></div>
+            <span class="closeWindow">&times;</span>
+            <ul class="user_lista">
+                <li><a href="{{logout_url}}">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<div class="content">
+
+    <div class="fundo">
+        
+    </div>
+    <div class="box__mensagem">
+        {% include 'partials/_mensagem.html'%}
+    </div>
+
+    <div>
+        {% block conteudoPrincipal%}
+        {%endblock%}
+    </div>
+
+</div>
+
+<script src="{%static 'js/info-user.js'%}"></script>
+{% block js %}
+{%endblock%}
+
+
+{%endblock%}

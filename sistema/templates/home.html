@@ -1,0 +1,172 @@
+{% extends 'base_sistema.html' %}
+{% load static %}
+
+{%block style%}
+    <link rel="stylesheet" href="{% static 'css/home/style.css' %}">
+{% block grafico %}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+
+      google.charts.setOnLoadCallback(drawChart2);
+
+      function drawChart2() {
+      var data = google.visualization.arrayToDataTable([
+        ["Vendas", "Total R$", { role: "style" } ],
+          {% for venda in vendas %}
+            ['{{ venda.mes }}', {{venda.total}}, "{{ venda.cor }}"],
+          {% endfor %}
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Vendas Últimos Meses (R$)",
+        height: 400,
+        bar: {groupWidth: "50%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart.draw(view, options);
+  }
+
+    google.charts.load('current', {'packages':['bar']});
+
+    </script>
+
+    <script>
+    google.charts.load("current", {packages:["corechart"]});
+
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Produtos", "Quantidade", { role: "style" } ],
+          {% for estoque in estoques %}
+              {% if estoque.quantidade > 0 %}
+                ['{{ estoque.produto }}', {{estoque.quantidade}}, "#45ba48"],
+              {% endif %}
+          {% endfor %}
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Estoque Produção Interna",
+        height: 400,
+        bar: {groupWidth: "50%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values2"));
+      chart.draw(view, options);
+  }
+
+    google.charts.load('current', {'packages':['bar']});
+    </script>
+
+    <script>
+    google.charts.load("current", {packages:["corechart"]});
+
+      google.charts.setOnLoadCallback(drawChart3);
+
+      function drawChart3() {
+      var data = google.visualization.arrayToDataTable([
+        ["Fornecedores", "Litros", { role: "style" } ],
+          {% for recebimento in recebimentos %}
+              ['{{ recebimento.fornecedor }}', {{recebimento.quantidade}}, "#45ba48"],
+          {% endfor %}
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Leite Recebido Mês Atual",
+        height: 400,
+        bar: {groupWidth: "50%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values3"));
+      chart.draw(view, options);
+  }
+
+    google.charts.load('current', {'packages':['bar']});
+    </script>
+
+    <script>
+        google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Status', 'Valor R$'],
+          ['Pago', {{vendas_atual.pago}}],
+          ['Em Aberto', {{ vendas_atual.em_aberto }}],
+          ['Vencido',  {{ vendas_atual.vencido }}],
+        ]);
+
+        var options = {
+          title: 'Vendas Mês Atual - Total R$ {{vendas_total}},00',
+          pieHole: 0.4,
+            colors: ['#56ba5a', '#2f88fa', '#c53145']
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+{%endblock%}
+{%endblock%}
+
+{%block titulo_header%}Home{%endblock%}
+
+{% block conteudoPrincipal%}
+    <div class="fundo">
+        
+    </div>
+
+    <div class="titulo">
+        <h2>Home</h2>
+    </div>
+
+<main>
+
+    <section class="conteudos">
+    
+        <div id="columnchart_values"  class="box grafico">
+    
+        </div>
+
+        <div id="donutchart"  class="box grafico">
+
+        </div>
+
+        <div id="columnchart_values2"  class="box grafico">
+
+        </div>
+
+        <div id="columnchart_values3"  class="box grafico">
+
+        </div>
+
+    </section>
+
+</main>
+
+{% endblock%}

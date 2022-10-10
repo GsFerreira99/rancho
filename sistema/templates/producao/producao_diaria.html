@@ -1,0 +1,128 @@
+{% extends 'base_sistema.html' %}
+{% load static %}
+
+
+{%block style%}
+    <link rel="stylesheet" href="{% static 'css/form.css'%}">
+    <link rel="stylesheet" href="{% static 'css/tabela.css'%}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+    <link rel="stylesheet" href="{% static 'css/producao/producaoDiaria.css' %}">
+
+    <script type="text/javascript" src="{% static 'js/jquery.js'%}"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script src="{%static 'js/table.js'%}"></script>
+{%endblock%}
+
+{%block titulo_header%}Produção Diária{%endblock%}
+
+{% block conteudoPrincipal%}
+
+    <div class="titulo">
+        <h2>Produção / Produção Diária</h2>
+    </div>
+
+    <section class="mainContent">
+
+        <div class="box-conteudo">
+            <button class="botao" id="myBtn">Novo</button>
+            <form action="{% url 'producao-diaria' %}" method="POST" class="form data">
+                {% csrf_token %}
+                <div>
+                    <label for="data">Periodo: </label>
+                    <input id="data_inicio" type="date" value="" name="data_inicio">
+                    <span class="center">à</span>
+                    <input id="data_fim" type="date" value="" name="data_fim">
+                </div>
+                <button class="button" type="submit" name="filtro" value="filtro">Filtrar</button>
+            </form>
+
+            <h3 class="filtro">{{filtro}}</h3>
+
+            <div class="campo ">
+                <table class="tabela" id="tabela" style="width:100%">
+                    <thead>
+                        <tr>
+                            <td>Lote</td>
+                            <td>Data</td>
+                            <td>Produto</td>
+                            <td>Detalhes</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for producao in producoes %}
+                        <tr>
+                            <td>{{producao.lote}}</td>
+                            <td>{{producao.data}}</td>
+                            <td>{{producao.produto}}</td>
+                            <td><a href="#"><img class="lupa" src="{% static 'img/lupa.svg'%}" alt=""></a></td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <div id="myModal" class="modal">
+
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <h2>Inserir Produção Diária</h2>
+
+              <form action="{% url 'producao-diaria' %}" method="POST" class="form">
+                {% csrf_token %}
+                <div>
+                    <label for="lote">Lote</label>
+                    <input id="lote" value="{{lote}}" type="number" name="lote">
+                </div>
+                <div>
+                    <label for="data">Data</label>
+                <input id="data" type="date" name="data">
+                </div>
+                <div>
+                    <label for="produto">Produto</label>
+                    <select id="produto" name="produto">
+                        <option></option>
+                        {% for produto in produtos %}
+                        <option>{{produto.nome}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="leite">Leite</label>
+                    <input id="leite" type="number" step="0.01" name="leite" value="{{dados.leite}}">
+                </div>
+                <div>
+                    <label for="sal">Sal</label>
+                    <input id="sal" type="number" step="0.001" name="sal" value="{{dados.sal}}">
+                </div>
+                <div>
+                    <label for="açucar">Açucar</label>
+                    <input id="açucar" type="number" step="0.001" name="açucar" value="{{dados.açucar}}">
+                </div>
+                <div>
+                    <label for="peso">Peso</label>
+                    <input id="peso" type="number" step="0.001" name="peso" value="{{dados.peso}}">
+                </div>
+                <div>
+                    <label for="observação">Observação</label>
+                    <textarea id="observação" rows="5" name="observação">{{dados.observação}}</textarea>
+                </div>
+
+                <button type="submit" >Inserir</button>
+            </form>
+            </div>
+          
+          </div>
+
+        {% block js %}
+          <script src="{%static 'js/modal.js'%}"></script>
+        {%endblock%}
+
+    </section>
+
+{%endblock%}

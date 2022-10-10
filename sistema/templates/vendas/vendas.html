@@ -1,0 +1,325 @@
+{% extends 'base_sistema.html' %}
+{% load static %}
+
+
+{%block style%}
+    <link rel="stylesheet" href="{% static 'css/form.css'%}">
+    <link rel="stylesheet" href="{% static 'css/tabela.css'%}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+
+    <script type="text/javascript" src="{% static 'js/jquery.js'%}"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script src="{%static 'js/table.js'%}"></script>
+
+    <link rel="stylesheet" href="{% static 'css/tabela.css'%}">
+    <link rel="stylesheet" href="{% static 'css/vendas/vendas.css' %}">
+{%endblock%}
+
+{%block titulo_header%}Vendas{%endblock%}
+
+{% block conteudoPrincipal%}
+
+    <div class="titulo">
+        <h2>Vendas / Consultar</h2>
+    </div>
+    <section class="mainContent">
+
+        <div class="box-conteudo">
+            <button class="botao" id="myBtn">Novo</button>
+            <form action="{% url 'vendas' %}" method="POST" class="form data">
+                {% csrf_token %}
+                <div class="busca">
+                    <label for="data">Periodo: </label>
+                    <input class="" id="data_inicio" type="date" value="{{data_inicio}}" name="data_inicio">
+                    <span class="center" style="margin: 0.5rem 1rem;">    à    </span>
+                    <input class="" id="data_fim" type="date" value="{{data_fim}}" name="data_fim">
+                    <span class="center" style="margin: 0.5rem 1rem;">    ou    </span>
+                    <select name="periodos" id="periodos">
+                        <option value=""></option>
+                        {% if periodos == 'ultima_semana' %}
+                            <option selected value="ultima_semana">Última Semana</option>
+                        {% else %}
+                            <option value="ultima_semana">Última Semana</option>
+                        {% endif %}
+
+                        {% if periodos == 'ultima_quinzena' %}
+                            <option selected value="ultima_quinzena">Última Quinzena</option>
+                        {% else %}
+                            <option value="ultima_quinzena">Última Quinzena</option>
+                        {% endif %}
+
+                        {% if periodos == 'mes_atual' %}
+                            <option selected value="mes_atual">Mês Atual</option>
+                        {% else %}
+                            <option value="mes_atual">Mês Atual</option>
+                        {% endif %}
+
+                        {% if periodos == 'mes_anterior' %}
+                            <option selected value="mes_anterior">Mês Anterior</option>
+                        {% else %}
+                            <option value="mes_anterior">Mês Anterior</option>
+                        {% endif %}
+
+                        {% if periodos == 'ultimo_trimestre' %}
+                            <option selected value="ultimo_trimestre">Último Trimestre</option>
+                        {% else %}
+                            <option value="ultimo_trimestre">Último Trimestre</option>
+                        {% endif %}
+
+                        {% if periodos == 'ultimo_semestre' %}
+                            <option selected value="ultimo_semestre">Último Semestre</option>
+                        {% else %}
+                            <option value="ultimo_semestre">Último Semestre</option>
+                        {% endif %}
+
+                        {% if periodos == 'ultimo_ano' %}
+                            <option selected value="ultimo_ano">Último Ano</option>
+                        {% else %}
+                            <option value="ultimo_ano">Último Ano</option>
+                        {% endif %}
+
+                    </select>
+                </div>
+                <div class="busca">
+                    <label for="status">Status Nota: </label>
+                    <select name="status" id="status">
+                        <option value=""></option>
+
+                        {% if status == 'Pago' %}
+                            <option selected value="Pago">Pago</option>
+                        {% else %}
+                            <option value="Pago">Pago</option>
+                        {% endif %}
+
+                        {% if status == 'Em Aberto' %}
+                            <option selected value="Em Aberto">Em Aberto</option>
+                        {% else %}
+                            <option value="Em Aberto">Em Aberto</option>
+                        {% endif %}
+
+                        {% if status == 'Vencido' %}
+                            <option selected value="Vencido">Vencido</option>
+                        {% else %}
+                            <option value="Vencido">Vencido</option>
+                        {% endif %}
+
+                        {% if status == 'Emitir Nota' %}
+                            <option selected value="Emitir Nota">Emitir Nota</option>
+                        {% else %}
+                            <option value="Emitir Nota">Emitir Nota</option>
+                        {% endif %}
+
+                    </select>
+                </div>
+                <button class="button" type="submit" name="filtro" value="filtro">Filtrar</button>
+            </form>
+
+            <h3 class="filtro">{{filtro}}</h3>
+            <div class="campo ">
+                <table class="tabela" id="tabela" style="width:100%">
+                    <thead>
+                        <tr>
+                            <td>Cod.</td>
+                            <td>Data</td>
+                            <td>Cliente</td>
+                            <td>Nº Nota</td>
+                            <td>Total</td>
+                            <td>Vencimento</td>
+                            <td>Status</td>
+                            <td>Detalhes</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for venda in vendas %}
+                        <tr>
+                            <td>{{venda.id}}</td>
+                            <td>{{venda.get_data}}</td>
+                            <td>{{venda.cliente}}</td>
+                            <td>{{venda.n_nota}}</td>
+                            <td class="valor-calculado">R$ {{venda.total}}</td>
+                            {%if venda.vencimento <= hoje and venda.status == 'Em Aberto'%}
+                                <td style="color:rgb(255, 0, 0); font-weight: 700;">{{venda.get_vencimento}}</td>
+                            {%else%}
+                            <td>{{venda.get_vencimento}}</td>
+                            {%endif%}
+
+                            {%if venda.status == 'Pago'%}
+                                <td style="color:rgb(17, 201, 17); font-weight: 700;">{{venda.status}}</td>
+                            {%elif venda.status == 'Emitir Nota'%}
+                                <td style="color:rgb(255, 0, 0); font-weight: 700;">{{venda.status}}</td>
+                            {%else%}
+                                <td style="color:rgb(0, 162, 255); font-weight: 700;">{{venda.status}}</td>
+                            {%endif%}
+                            
+                            <td><a href="/producao/vendas/{{venda.id}}"><img class="lupa" src="{% static 'img/lupa.svg'%}" alt=""></a></td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td id="total" class="bold"></td>
+                            <td></td>
+                            <td></td>
+                            <td id="qtdtotal" class="center bold"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+
+        </div>
+        
+        {%if status_venda == True%}
+        <div id="myModal" style="display: block;" class="modal">
+        {%else%}
+        <div id="myModal" class="modal">
+        {%endif%}
+
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <h2>Nova Venda</h2>
+              {% include 'partials/_mensagem.html'%}
+
+              <form id="nova-venda" action="{% url 'vendas' %}" method="POST" class="form">
+                {% csrf_token %}
+                <div>
+                    <label for="cliente">Cliente</label>
+                    <select id="cliente" name="cliente">
+                        <option></option>
+                        {% for cliente in clientes %}
+                            {% if cliente.content_object.nome == clienteSelected %}
+                            <option selected>{{cliente}}</option>
+                            {%else%}
+                            <option>{{cliente}}</option>
+                            {%endif%}
+                        {%endfor%}
+                    </select>
+                </div>
+                <div>
+                    <label for="data">Data</label>
+                <input id="data" type="date" value="{{data}}" name="data">
+                </div>
+                <hr>
+                <div id="produtos-venda">
+                    <div>
+                        <label for="produto">Produto</label>
+                        <select id="produto" name="produto">
+                            <option></option>
+                            {% for produto in produtos %}
+                            <option>{{produto.nome}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="quantidade">Quantidade</label>
+                        <input id="quantidade" type="number" step="0.001" name="quantidade" value="">
+                    </div>
+
+                    <div>
+                        <label for="valor">Valor</label>
+                        <input id="valor" type="number" step="0.01" name="valor" value="{{valor}}">
+                    </div>
+
+                    <button name='addProduto' value="addProduto" type="submit" id="adicionar"><img src="{%static 'img/adicionar.png'%}" alt=""></button>
+                </div>
+
+                <table id="tabela-venda" class="tabela">
+                    <thead>
+                        <tr>
+                            <td>Produto</td>
+                            <td>Uni</td>
+                            <td>Valor</td>
+                            <td>Qnt</td>
+                            <td>Subtotal</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        
+                        {% for key, value in listaVenda.items %}
+                        <tr>
+                            <td>{{value.produto}}</td>
+                            <td>{{value.unidade}}</td>
+                            <td>{{value.valor}}</td>
+                            <td>{{value.quantidade}}</td>
+                            <td>{{value.subtotal}}</td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">Total</td>
+                            <td id="total" style="text-align: center;">R$ {{total}}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div>
+                    <label for="faturamento">Faturamento</label>
+                    <select id="faturamento" name="faturamento">
+                        <option></option>
+                        {% if faturamentoSelected == '7 Dias'%}
+                        <option selected>7 Dias</option>
+                        {%else%}
+                        <option>7 Dias</option>
+                        {%endif%}
+
+                        {% if faturamentoSelected == '14 Dias'%}
+                        <option selected>14 Dias</option>
+                        {%else%}
+                        <option>14 Dias</option>
+                        {%endif%}
+
+                        {% if faturamentoSelected == '21 Dias'%}
+                        <option selected>21 Dias</option>
+                        {%else%}
+                        <option>21 Dias</option>
+                        {%endif%}
+
+                        {% if faturamentoSelected == '30 Dias'%}
+                        <option selected>30 Dias</option>
+                        {%else%}
+                        <option>30 Dias</option>
+                        {%endif%}
+                        
+                    </select>
+                </div>
+
+                <button name='salvarVenda' value="salvarVenda" type="submit" >Salvar</button>
+            </form>
+            </div>
+          
+          </div>
+    
+          {% block js %}
+          <script src="{%static 'js/modal.js'%}"></script>
+        
+          <script>
+            $('#tabela').on('draw.dt', function(){
+            var els = document.getElementsByClassName("valor-calculado");
+            var valorcalculado = 0.0;
+            [].forEach.call(els, function (el) 
+            {   
+                var valor = el.innerHTML
+                valor = valor.replace(",", ".")
+                valor = valor.replace("R$ ", "")
+                valorcalculado += parseFloat(valor);
+            });
+
+            document.getElementById("qtdtotal").innerHTML = "R$ " + valorcalculado.toFixed(2);
+            document.getElementById("total").innerHTML = "Total";
+            })
+            
+          </script>
+
+          {%endblock%}
+
+    </section>
+
+{%endblock%}

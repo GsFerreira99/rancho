@@ -1,0 +1,156 @@
+{% extends 'base_sistema.html' %}
+{% load static %}
+
+
+{%block style%}
+    <link rel="stylesheet" href="{% static 'css/form.css'%}">
+    <link rel="stylesheet" href="{% static 'css/tabela.css'%}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+
+    <script type="text/javascript" src="{% static 'js/jquery.js'%}"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script src="{%static 'js/table.js'%}"></script>
+
+    <link rel="stylesheet" href="{% static 'css/tabela.css'%}">
+    <link rel="stylesheet" href="{% static 'css/vendas/vendas.css'%}">
+{%endblock%}
+
+{%block titulo_header%}Detalhes{%endblock%}
+
+{% block conteudoPrincipal%}
+
+    <div class="titulo">
+        <h2><a class="link" href="{% url 'vendas' %}">Vendas</a> / Detalhes  </h2>
+    </div>
+
+    <section class="mainContent">
+
+        <div class="box-conteudo">
+            <div class="campo ">
+                <div class="detalhe-titulo">
+                    <h2 class="titulo_box">{{venda.cliente}} - nº{{venda.id}}</h2>
+                    <a class="link voltar" href="{% url 'vendas' %}">Voltar</a>
+
+                </div>
+
+
+                <form action="{% url 'vendas-detalhes' venda.id %}" method="POST" class="form">
+                    {% csrf_token %}
+                    
+                    <div class="form_campo">
+                        <label for="cpf/cnpj">CPF/CNPJ</label>
+                        <input id="cpf/cnpj" type="text" readonly value="{{venda.cliente.content_object.credenciais}}" name="cpf/cnpj">
+                    </div>
+
+                    <div class="form_campo">
+                        <label for="inscricao_estadual">Inscrição Estadual</label>
+                        <input id="inscricao_estadual" type="text" readonly value="{{venda.cliente.content_object.inscricao_estadual}}" name="inscricao_estadual">
+                    </div>
+
+                    <div class="form_campo">
+                        <label for="status">Status</label>
+
+                        {%if venda.status == 'Pago'%}
+                        <select id="status" name="status">
+                            <option selected>Pago</option>
+                        </select>
+                        {%else%}
+                        <select id="status"  name="status">
+
+                            <option></option>
+                            {%if venda.status == 'Emitir Nota'%}
+                                <option selected>Emitir Nota</option>
+                            {%else%}
+                                <option>Emitir Nota</option>
+                            {%endif%}
+
+                            {%if venda.status == 'Em Aberto'%}
+                                <option selected>Em Aberto</option>
+                            {%else%}
+                                <option>Em Aberto</option>
+                            {%endif%}
+
+                            {%if venda.status == 'Pago'%}
+                                <option selected>Pago</option>
+                            {%else%}
+                                <option>Pago</option>
+                            {%endif%}
+                        </select>
+                        {%endif%}
+                    </div>
+
+                    <div class="form_campo">
+                        <label for="n_nota">Nº Nota</label>
+                        <input id="n_nota" type="text" value="{{venda.n_nota}}" name="n_nota">
+                    </div>
+
+                    <div class="form_campo">
+                        <label for="data">Venda</label>
+                        <input id="data" type="date" readonly value="{{venda.data}}" name="data">
+                    </div>
+
+                    <div class="form_campo">
+                        <label for="faturamento">Faturamento</label>
+                        <input id="faturamento" type="text" readonly value="{{venda.faturamento}}" name="faturamento">
+                    </div>
+
+                    <div class="form_campo">
+                        <label for="vencimento">Vencimento</label>
+                        <input id="vencimento" readonly type="date" value="{{venda.vencimento}}" name="vencimento">
+                    </div>
+
+                    <table id="tabela-venda form_campo" class="tabela">
+                        <thead>
+                            <tr>
+                                <td>Produto</td>
+                                <td>Uni</td>
+                                <td>Valor</td>
+                                <td>Qnt</td>
+                                <td>Subtotal</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+    
+                            
+                            {% for venda in itemsVenda %}
+                            <tr>
+                                <td>{{venda.produto}}</td>
+                                <td>{{venda.unidade}}</td>
+                                <td>{{venda.valor}}</td>
+                                <td>{{venda.quantidade}}</td>
+                                <td>{{venda.total}}</td>
+                            </tr>
+                            {%endfor%}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">Total</td>
+                                <td id="total" style="text-align: center;">R$ {{venda.total}}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <div>
+                        <p>Pix para pagamento: +55 92 99304-6769 - SILVANIA MONTEIRO BABA</p>
+                    </div>
+
+
+
+
+                    <button class="botao" type="submit" name="enviarForm" value="enviarForm" id="myBtn" >Salvar</button>
+                    <a class="botao" target="_blank" href="/producao/vendas/{{venda.id}}/recibo">Emitir Recibo</a>
+
+                </form>
+
+            </div>
+        </div>
+
+    
+          {% block js %}
+          <script src="{%static 'js/modal.js'%}"></script>
+          {%endblock%}
+
+    </section>
+
+{%endblock%}

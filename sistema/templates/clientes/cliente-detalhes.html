@@ -1,0 +1,143 @@
+{% extends 'base_sistema.html' %}
+{% load static %}
+
+
+{%block style%}
+    <link rel="stylesheet" href="{% static 'css/form.css'%}">
+    <link rel="stylesheet" href="{% static 'css/tabela.css'%}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+
+    <script type="text/javascript" src="{% static 'js/jquery.js'%}"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script src="{%static 'js/table.js'%}"></script>
+
+    <link rel="stylesheet" href="{% static 'css/tabela.css'%}">
+    <link rel="stylesheet" href="{% static 'css/vendas/vendas.css'%}">
+{%endblock%}
+
+{%block titulo_header%}Detalhes{%endblock%}
+
+{% block conteudoPrincipal%}
+
+    <div class="titulo">
+        <h2><a class="link" href="{% url 'clientes' %}">Cliente</a> / Detalhes  </h2>
+    </div>
+
+    <section class="mainContent">
+
+        <div class="box-conteudo">
+            <div class="campo ">
+                <div class="detalhe-titulo">
+                    <h2 class="titulo_box">{{cliente.nome}}</h2>
+                    <a class="link voltar" href="{% url 'clientes' %}">Voltar</a>
+
+                </div>
+
+                <form action="{% url 'cliente-detalhes' cliente.id %}" method="POST" class="form">
+                    {% csrf_token %}
+
+                    <div class="form_campo">
+                            <label for="id">ID</label>
+                            <input id="id" readonly type="text" value="{{id}}" name="id">
+                    </div>
+
+                    {% if tipo == 'PF' %}
+
+                        <div class="form_campo">
+                            <label for="tipo">PESSOA FÍSICA</label>
+                            <input id="tipo" type="text" readonly value="Pessoa Física" name="tipo">
+                        </div>
+
+                        <div class="form_campo">
+                            <label for="nome">NOME</label>
+                            <input id="nome" type="text" value="{{cliente.nome}}" name="nome">
+                        </div>
+
+                        <div class="form_campo">
+                            <label for="razao_sobrenome">SOBRENOME</label>
+                            <input id="razao_sobrenome" type="text" value="{{cliente.sobrenome}}" name="razao_sobrenome">
+                        </div>
+
+                        <div class="form_campo">
+                            <label for="cpf_cnpj">CPF</label>
+                            <input id="cpf_cnpj" type="text" value="{{cliente.cpf}}" name="cpf_cnpj">
+                        </div>
+
+                        <div class="form_campo">
+                            <label for="telefone">TELEFONE</label>
+                            <input id="telefone" type="text" value="{{cliente.telefone}}" name="telefone">
+                        </div>
+
+                        <div class="form_campo">
+                            <label for="email">EMAIL</label>
+                            <input id="email" type="text" value="{{cliente.email}}" name="email">
+                        </div>
+
+                        <div>
+                            <label for="endereco">ENDEREÇO</label>
+                            <textarea id="endereco" rows="5" name="endereco">{{cliente.endereco}}</textarea>
+                        </div>
+
+                    {% endif %}
+
+                    {% if tipo == 'PJ' %}
+
+                        <div class="form_campo">
+                            <label for="tipo">TIPO</label>
+                            <input id="tipo" type="text" readonly value="Pessoa Jurídica" name="tipo">
+                        </div>
+
+                        <div class="form_campo">
+                            <label for="nome">NOME</label>
+                            <input id="nome" type="text" value="{{cliente.nome}}" name="nome">
+                        </div>
+
+                        <div class="form_campo">
+                            <label for="razao_sobrenome">RAZÃO SOCIAL</label>
+                            <input id="razao_sobrenome" type="text" value="{{cliente.razao_social}}" name="razao_sobrenome">
+                        </div>
+
+                        <div class="form_campo">
+                            <label for="cpf_cnpj">CNPJ</label>
+                            <input id="cpf_cnpj" type="text" value="{{cliente.cnpj}}" name="cpf_cnpj">
+                        </div>
+
+                        <div class="form_campo">
+                            <label for="inscricao_estadual">INSCRIÇÃO ESTADUAL</label>
+                            <input id="inscricao_estadual" type="text" value="{{cliente.inscricao_estadual}}" name="inscricao_estadual">
+                        </div>
+
+                        <div class="form_campo">
+                            <label for="telefone">TELEFONE</label>
+                            <input id="telefone" type="text" value="{{cliente.telefone}}" name="telefone">
+                        </div>
+
+                        <div class="form_campo">
+                            <label for="email">EMAIL</label>
+                            <input id="email" type="text" value="{{cliente.email}}" name="email">
+                        </div>
+
+                        <div>
+                            <label for="endereco">ENDEREÇO</label>
+                            <textarea id="endereco" rows="5" name="endereco">{{cliente.endereco}}</textarea>
+                        </div>
+
+                    {% endif %}
+
+                    <button class="botao" type="submit" name="editForm" value="editForm" id="myBtn" >Salvar</button>
+
+                </form>
+
+
+            </div>
+        </div>
+
+    
+          {% block js %}
+          <script src="{%static 'js/modal.js'%}"></script>
+          {%endblock%}
+
+    </section>
+
+{%endblock%}

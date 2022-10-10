@@ -1,0 +1,130 @@
+{% extends 'base_sistema.html' %}
+{% load static %}
+
+
+{%block style%}
+    <link rel="stylesheet" href="{% static 'css/form.css'%}">
+    <link rel="stylesheet" href="{% static 'css/tabela.css'%}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+
+    <script type="text/javascript" src="{% static 'js/jquery.js'%}"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script src="{%static 'js/table.js'%}"></script>
+
+    <link rel="stylesheet" href="{% static 'css/tabela.css'%}">
+    <link rel="stylesheet" href="{% static 'css/vendas/vendas.css' %}">
+{%endblock%}
+
+{%block titulo_header%}Clientes{%endblock%}
+
+{% block conteudoPrincipal%}
+
+    <div class="titulo">
+        <h2>Clientes / Consultar</h2>
+    </div>
+
+    <section class="mainContent">
+
+        <div class="box-conteudo">
+            <button class="botao" id="myBtn">Novo</button>
+            <div class="campo ">
+                <table class="tabela" id="tabela" style="width:100%">
+                    <thead>
+                        <tr>
+                            <td>Nome</td>
+                            <td>Sobrenome / Razão Social</td>
+                            <td>CPF / CNPJ</td>
+                            <td>TELEFONE</td>
+                            <td>I.E</td>
+                            <td>Endereço</td>
+                            <td>Detalhes</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for cliente in clientes %}
+                        <tr>
+                            <td>{{cliente.content_object.nome}}</td>
+                            <td>{{cliente.content_object.razao_social}}{{cliente.sobrenome}}</td>
+                            <td>{{cliente.content_object.credenciais}}</td>
+                            <td>{{cliente.content_object.contato}}</td>
+                            <td>{{cliente.content_object.inscricao_estadual}}</td>
+                            <td>{{cliente.content_object.endereco}}</td>
+                            <td><a href="/producao/cliente/{{cliente.id}}"><img class="lupa" src="{% static 'img/lupa.svg'%}" alt=""></a></td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+        <div id="myModal" class="modal">
+
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <h2>Cadastrar Novo Cliente</h2>
+
+              <form action="{% url 'clientes' %}" method="POST" class="form">
+                {% csrf_token %}
+                  <div>
+                      <label for="tipo">Tipo Cliente: </label>
+                        <select name="tipo" id="periodos">
+                      <option value=""></option>
+                      <option value="PF">Pessoa Física</option>
+                      <option value="PJ">Pessoa Juridica</option>
+
+                  </select>
+                  </div>
+
+                  <div>
+                    <label for="nome">Nome: </label>
+                    <input id="nome" type="text" value="{{nome}}" name="nome">
+                  </div>
+
+                  <div>
+                    <label for="razao_sobrenome">Razão Social/Sobrenome: </label>
+                    <input id="razao_sobrenome" type="text" value="{{razao_sobrenome}}" name="razao_sobrenome">
+                  </div>
+
+                  <div>
+                    <label for="inscricao_estadual">Inscrição Estadual: </label>
+                    <input id="inscricao_estadual" type="text" value="{{inscricao_estadual}}" name="inscricao_estadual">
+                  </div>
+
+                  <div>
+                    <label for="cpf_cnpj">CPF/CNPJ: </label>
+                    <input id="cpf_cnpj" type="text" value="{{cpf_cnpj}}" name="cpf_cnpj">
+                  </div>
+
+                  <div>
+                    <label for="telefone">TELEFONE: </label>
+                    <input id="telefone" type="text" value="{{telefone}}" name="telefone">
+                  </div>
+
+                  <div>
+                    <label for="email">EMAIL: </label>
+                    <input id="email" type="text" value="{{email}}" name="email">
+                  </div>
+
+                  <div>
+                      <label for="endereco">ENDEREÇO</label>
+                      <textarea id="endereco" rows="5" name="endereco">{{cliente.endereco}}</textarea>
+                  </div>
+
+                  <button class="botao" type="submit" name="salvar" value="salvar" id="myBtn" >Salvar</button>
+
+            </form>
+            </div>
+          
+          </div>
+    
+          {% block js %}
+          <script src="{%static 'js/modal.js'%}"></script>
+          
+          {%endblock%}
+
+    </section>
+
+{%endblock%}
