@@ -2,20 +2,21 @@ on:
   push:
     branches: main
 name: 🚀 Deploy website on push
-jobs:
-  web-deploy:
-    name: 🎉 Deploy
-    runs-on: ubuntu-latest
-    steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v2
 
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.3.2
-      with:
-        server: 191.101.234.26
-        username: gabriel
-        password: ${{ secrets.ftp_password }}
-        protocol: ftps
-        server-dir: /home/gabriel/
-        port: 22
+jobs:
+    deploy_job:
+    runs-on: ubuntu-latest
+    name: deploy
+    steps:
+        - name: Checkout
+        uses: actions/checkout@v2
+        - name: Deploy file
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+            username: ${{ secrets.ftp_username }}
+            server: ${{ secrets.ftp_host }}
+            port: ${{ secrets.ftp_port }}
+            local_path: './static/*'
+            remote_path: '/home/gabriel/'
+            sftp_only: true
+            password: ${{ secrets.ftp_password }}
