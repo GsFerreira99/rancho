@@ -14,6 +14,7 @@ jobs:
       uses: actions/checkout@v2
     
     - name: 📂 Coletar Static
+    - uses: actions/checkout@v2
     - run: npm install
       shell: bash
     - uses: tzzs/server-shell@v3
