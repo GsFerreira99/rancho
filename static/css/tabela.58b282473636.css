@@ -1,0 +1,68 @@
+.tabela{
+    color: var(--preto);
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.tabela thead {
+    width: 100%;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.tabela thead tr {
+    height: 3rem;
+}
+
+.tabela tbody {
+    font-size: 0.8rem;
+}
+
+.tabela tfoot {
+    height: 3rem;
+    text-align: center;
+}
+
+.tabela tfoot tr td {
+    text-align: center;
+    padding-left: 1rem;
+}
+
+.tabela th,.tabela td {
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    height: 1.5rem;
+    vertical-align: middle;
+  }
+
+.tabela tbody tr:hover {
+    background-color: var(--input-bg);
+}
+
+.dataTables_wrapper {
+    width: 250px;
+    margin: 0 auto;
+}
+
+#tabela-venda tbody input {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    font-size: 0.7rem;
+    text-align: center;
+}
+
+
+@media screen and (min-width: 400px) {
+    .dataTables_wrapper {
+        width: 300px;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 550px) {
+    .dataTables_wrapper {
+        width: auto;
+        margin: 0;
+    }
+}

@@ -6,9 +6,12 @@ __pycache__/
 # C extensions
 *.so
 
+<<<<<<< HEAD
 
 .idea/
 
+=======
+>>>>>>> 1b63f10 (Initial commit)
 # Distribution / packaging
 .Python
 build/
@@ -129,4 +132,8 @@ venv.bak/
 dmypy.json
 
 # Pyre type checker
+<<<<<<< HEAD
 .pyre/
+=======
+.pyre/
+>>>>>>> 1b63f10 (Initial commit)

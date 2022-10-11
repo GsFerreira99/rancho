@@ -1,0 +1,21 @@
+.carousel-inner , .carousel-item, .carousel-item img {
+    height: 14rem;
+}
+
+@media (min-width:600px) {
+    .carousel-inner , .carousel-item, .carousel-item img {
+    height: 20rem;
+}
+}
+
+@media screen and (min-width: 1024px) {
+    .carousel-inner , .carousel-item, .carousel-item img {
+        height: 25rem;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .carousel-inner , .carousel-item, .carousel-item img {
+        height: 30rem;
+    }
+}
