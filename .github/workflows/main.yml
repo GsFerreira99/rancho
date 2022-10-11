@@ -27,9 +27,6 @@ jobs:
     name: 🎉 Collect
     runs-on: ubuntu-18.04
     steps:
-    - uses: actions/checkout@v2
-    - run: npm install
-      shell: bash
     - uses: tzzs/server-shell@v3
       with:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY}}
