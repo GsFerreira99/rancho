@@ -17,7 +17,6 @@ jobs:
             username: ${{ secrets.ftp_username }}
             server: ${{ secrets.ftp_host }}
             port: ${{ secrets.ftp_port }}
-            local_path: './static/*'
             remote_path: '/home/gabriel/'
             sftp_only: true
             password: ${{ secrets.ftp_password }}
