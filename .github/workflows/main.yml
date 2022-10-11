@@ -20,6 +20,22 @@ jobs:
             remote_path: '/home/gabriel/rancho/'
             sftp_only: true
             password: ${{ secrets.ftp_password }}
+      
+  comandos:
+    name: 🎉 Carregar Static Files
+    runs-on: ubuntu-latest
+    steps:
+    - name: 📂 Iniciar venv
+      run: source rancho/ranchoenv/bin/activate
+    - name: 📂 Instalar Pacotes
+      run: pip install -r requirements.txt
+    - name: 📂 Coletar Static
+      run: python rancho/manage.py collectstatic
+    - name: 📂 Recarregar Gunicorn
+      run: sudo systemctl restart gunicorn
+      
+
+        
             
             
 
