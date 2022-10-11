@@ -17,5 +17,5 @@ jobs:
         username: gabriel
         password: ${{ secrets.ftp_password }}
         protocol: ftps
-        local-dir: home/gabriel/
+        local-dir: /home/gabriel/
         port: 22
