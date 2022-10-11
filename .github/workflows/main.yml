@@ -31,7 +31,7 @@ jobs:
       with:
           PRIVATE_KEY: ${{ secrets.public_key}}
           USERNAME: ${{secrets.ftp_username}}
-          IP: ${{secrets.ftp_host}}
+          IP: ${{secrets.ftp_domain}}
           PORT: ${{secrets.ftp_port}}
           SHELL: |
             "ls"
