@@ -4,15 +4,10 @@ on:
   push:
     branches: main
 
-
 jobs:
   web-deploy:
     name: 🎉 Deploy
     runs-on: ubuntu-18.04
-    strategy:
-      max-parallel: 4
-      matrix:
-        python-version: [3.8, 3.9]
     defaults:
         run:
           shell: bash
@@ -22,7 +17,7 @@ jobs:
       
     - name: 📂 Coletar Static
       run: |
-          source rancho/ranchoenv/bin/activate
+          sudo source rancho/ranchoenv/bin/activate
           pip install -r requirements.txt
           python rancho/manage.py collectstatic
           sudo systemctl restart gunicorn
