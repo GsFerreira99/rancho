@@ -8,14 +8,13 @@ jobs:
   web-deploy:
     name: 🎉 Deploy
     runs-on: ubuntu-18.04
-    defaults:
-        run:
-          shell: bash
+
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2
     
     - name: 📂 Coletar Static
+    - run: npm install
       shell: bash
     - uses: tzzs/server-shell@v3
       with:
