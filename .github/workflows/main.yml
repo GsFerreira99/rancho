@@ -29,7 +29,7 @@ jobs:
     steps:
     - uses: tzzs/server-shell@v3
       with:
-          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY}}
+          PRIVATE_KEY: ${{ secrets.public_key}}
           USERNAME: ${{secrets.ftp_username}}
           IP: ${{secrets.ftp_host}}
           PORT: ${{secrets.ftp_port}}
