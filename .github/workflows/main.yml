@@ -22,30 +22,3 @@ jobs:
             remote_path: '/home/gabriel/rancho/'
             sftp_only: true
             password: ${{ secrets.ftp_password }}
-
-  collect:
-    name: 🎉 Collect
-    runs-on: ubuntu-18.04
-    steps:
-    - uses: tzzs/server-shell@v3
-      with:
-          PRIVATE_KEY: ${{ secrets.public_key}}
-          USERNAME: ${{secrets.ftp_username}}
-          IP: ${{secrets.ftp_domain}}
-          PORT: ${{secrets.ftp_port}}
-          SHELL: |
-            "ls"
-            "pip install -r requirements.txt"
-            "source rancho/ranchoenv/bin/activate"
-            "python rancho/manage.py collectstatic"
-            "sudo systemctl restart gunicorn"
-            "deactivate  "
-  
-    
-
-
-        
-            
-            
-
-
