@@ -14,13 +14,23 @@ jobs:
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2
-      
+    
     - name: 📂 Coletar Static
-      run: |
-          sudo source rancho/ranchoenv/bin/activate
-          pip install -r requirements.txt
-          python rancho/manage.py collectstatic
-          sudo systemctl restart gunicorn
+      shell: bash
+    - uses: tzzs/server-shell@v3
+      with:
+        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY}}
+        USERNAME: ${{secrets.ftp_username}}
+        IP: ${{secrets.ftp_host}}
+        PORT: ${{secrets.ftp_port}}
+        SHELL: |
+          "ls"
+          "pip install -r requirements.txt"
+          "source rancho/ranchoenv/bin/activate"
+          "python rancho/manage.py collectstatic"
+          "sudo systemctl restart gunicorn"
+          "deactivate  "
+          
     
     - name: 📂 Sync files
       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
