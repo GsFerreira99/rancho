@@ -11,23 +11,7 @@ jobs:
 
     steps:
     - name: 🚚 Get latest code
-      uses: actions/checkout@v2
-    
-    - name: 📂 Coletar Static
-    - uses: tzzs/server-shell@v3
-      with:
-        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY}}
-        USERNAME: ${{secrets.ftp_username}}
-        IP: ${{secrets.ftp_host}}
-        PORT: ${{secrets.ftp_port}}
-        SHELL: |
-          "ls"
-          "pip install -r requirements.txt"
-          "source rancho/ranchoenv/bin/activate"
-          "python rancho/manage.py collectstatic"
-          "sudo systemctl restart gunicorn"
-          "deactivate  "
-          
+      uses: actions/checkout@v2          
     
     - name: 📂 Sync files
       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
@@ -38,6 +22,27 @@ jobs:
             remote_path: '/home/gabriel/rancho/'
             sftp_only: true
             password: ${{ secrets.ftp_password }}
+
+  collect:
+    name: 🎉 Collect
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - run: npm install
+      shell: bash
+    - uses: tzzs/server-shell@v3
+      with:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY}}
+          USERNAME: ${{secrets.ftp_username}}
+          IP: ${{secrets.ftp_host}}
+          PORT: ${{secrets.ftp_port}}
+          SHELL: |
+            "ls"
+            "pip install -r requirements.txt"
+            "source rancho/ranchoenv/bin/activate"
+            "python rancho/manage.py collectstatic"
+            "sudo systemctl restart gunicorn"
+            "deactivate  "
   
     
 
