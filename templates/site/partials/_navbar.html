@@ -1,0 +1,55 @@
+{% load static %}
+
+{% block css %}
+    <script type="text/javascript">
+        function Ocultar(el) {
+        var display = document.getElementById(el).style.display;
+        if(display === "none")
+            document.getElementById(el).style.display = 'block';
+        else
+            document.getElementById(el).style.display = 'none';
+    }
+    </script>
+    <link rel="stylesheet" href="{% static 'css/site/navbar.css' %}">
+{% endblock %}
+
+<nav class="nav">
+
+    <div class="nav-items">
+        <a class="nav-items--logo" href="">
+            <img class="nav-items--logo---img" src="{% static 'img/logo.png' %}" alt="logo rancho alere">
+            <img class="nav-items--logo---img" src="{% static 'img/rancho-alere.png' %}" alt="rancho alere">
+        </a>
+
+        <ul class="nav-navbar">
+                    <li class="nav-navbar--item"><a class="navbar--item-link" href="">Início</a></li>
+                    <li class="nav-navbar--item"><a class="navbar--item-link" href="">Produtos</a></li>
+                    <li class="nav-navbar--item"><a class="navbar--item-link" href="">Sobre Nós</a></li>
+                    <li class="nav-navbar--item"><a class="navbar--item-link" href="">Contato</a></li>
+        </ul>
+
+        <div class="nav-items--toggle">
+                <input id="menu-toggle" class="nav-items--toggle---input" onclick="Ocultar('menu')" type="checkbox" />
+                <label class="nav-items--toggle---label" for="menu-toggle">
+                    <img src="{% static 'img/toggle.png' %}" alt=""/>
+                </label>
+        </div>
+    </div>
+
+    <ul id="menu" class="nav-mobile">
+        <li class="nav-mobile--item"><a class="nav-mobile--item---link" href="">Início</a></li>
+        <li class="nav-mobile--item"><a class="nav-mobile--item---link" href="">Produtos</a></li>
+        <li class="nav-mobile--item"><a class="nav-mobile--item---link" href="">Sobre Nós</a></li>
+        <li class="nav-mobile--item"><a class="nav-mobile--item---link" href="">Contato</a></li>
+    </ul>
+
+    <ul class="nav-contatos">
+        <li class="nav-contatos--item"><a href=""><img alt="" src="{% static 'img/email.svg' %}">contato@ranchoalere.online</a></li>
+        <li class="nav-contatos--item"><a href=""><img alt="" src="{% static 'img/loc.svg' %}">Parintins, Amazonas</a></li>
+        <li class="nav-contatos--item"><a href=""><img alt="" src="{% static 'img/tel.svg' %}">+55 92 99204-6774</a></li>
+    </ul>
+
+    <span class="separador">
+        <img alt="" src="{% static 'img/separador.png' %}">
+    </span>
+</nav>

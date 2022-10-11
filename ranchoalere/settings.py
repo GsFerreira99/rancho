@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-zx-hkzz!_i&e$q!_2fs=qgc-n01fvpo^vwd_i9_c)@lwvccp5j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ranchoalere.online', '127.0.0.1']
+ALLOWED_HOSTS = ['ranchoalere.online', '127.0.0.1', 'localhost']
 
 AUTH_USER_MODEL = "sistema.User"
 

@@ -1,0 +1,12 @@
+:root {
+    --raleway: 'Raleway', sans-serif;
+    --green-bg: #009D2D;
+}
+
+body {
+    width: 100vw;
+}
+
+.base {
+    font-family: var(--raleway);
+}
