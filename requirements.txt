@@ -4,7 +4,7 @@ django-jquery==3.1.0
 mysql-connector-python==8.0.30
 mysqlclient==2.1.1
 Pillow==9.2.0
-protobuf==3.20.1
+protobuf==3.20.2
 PyPDF2==2.11.1
 reportlab==3.6.11
 sqlparse==0.4.3
