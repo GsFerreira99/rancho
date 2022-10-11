@@ -6,12 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
-<<<<<<< HEAD
-
+ranchoenv/
 .idea/
 
-=======
->>>>>>> 1b63f10 (Initial commit)
 # Distribution / packaging
 .Python
 build/
