@@ -1,19 +1,27 @@
+name: Deploy
+
 on:
   push:
     branches: main
-name: 🚀 Deploy website on push
+
 jobs:
   web-deploy:
     name: 🎉 Deploy
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
+    environment: 
+      name: production
+      url: https://ranchoalere.online
+
     steps:
     - name: 🚚 Get latest code
-      uses: actions/checkout@v2
-
+      uses: actions/checkout@v2          
+    
     - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.3.2
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
       with:
-        server: ${{secrets.ftp_host}}
-        username: ${{secrets.ftp_username}}
-        password: ${{ secrets.ftp_password }}
-        server-dir: home/gabriel/rancho/
+            username: ${{ secrets.ftp_username }}
+            server: ${{ secrets.ftp_host }}
+            port: ${{ secrets.ftp_port }}
+            remote_path: '/home/gabriel/rancho/'
+            sftp_only: true
+            password: ${{ secrets.ftp_password }}
