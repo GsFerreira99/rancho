@@ -1,0 +1,37 @@
+-- Logs begin at Fri 2022-03-18 10:02:35 UTC, end at Sun 2022-10-09 13:18:37 UTC. --
+Oct 09 13:14:30 vps.rancho systemd[1]: Started gunicorn daemon.
+Oct 09 13:14:30 vps.rancho systemd[30683]: [0;1;31m[0;1;39m[0;1;31mgunicorn.service: Failed to determine user credentials: No such process[0m
+Oct 09 13:14:30 vps.rancho systemd[30683]: [0;1;31m[0;1;39m[0;1;31mgunicorn.service: Failed at step USER spawning /home/gabriel/rancho/ranchoenv/bin/gunicorn: No such process[0m
+Oct 09 13:14:30 vps.rancho systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Main process exited, code=exited, status=217/USER[0m
+Oct 09 13:14:30 vps.rancho systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Failed with result 'exit-code'.[0m
+Oct 09 13:14:30 vps.rancho systemd[1]: Started gunicorn daemon.
+Oct 09 13:14:30 vps.rancho systemd[30685]: [0;1;31m[0;1;39m[0;1;31mgunicorn.service: Failed to determine user credentials: No such process[0m
+Oct 09 13:14:30 vps.rancho systemd[30685]: [0;1;31m[0;1;39m[0;1;31mgunicorn.service: Failed at step USER spawning /home/gabriel/rancho/ranchoenv/bin/gunicorn: No such process[0m
+Oct 09 13:14:30 vps.rancho systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Main process exited, code=exited, status=217/USER[0m
+Oct 09 13:14:30 vps.rancho systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Failed with result 'exit-code'.[0m
+Oct 09 13:14:30 vps.rancho systemd[1]: Started gunicorn daemon.
+Oct 09 13:14:30 vps.rancho systemd[30687]: [0;1;31m[0;1;39m[0;1;31mgunicorn.service: Failed to determine user credentials: No such process[0m
+Oct 09 13:14:30 vps.rancho systemd[30687]: [0;1;31m[0;1;39m[0;1;31mgunicorn.service: Failed at step USER spawning /home/gabriel/rancho/ranchoenv/bin/gunicorn: No such process[0m
+Oct 09 13:14:30 vps.rancho systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Main process exited, code=exited, status=217/USER[0m
+Oct 09 13:14:30 vps.rancho systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Failed with result 'exit-code'.[0m
+Oct 09 13:14:30 vps.rancho systemd[1]: Started gunicorn daemon.
+Oct 09 13:14:30 vps.rancho systemd[30689]: [0;1;31m[0;1;39m[0;1;31mgunicorn.service: Failed to determine user credentials: No such process[0m
+Oct 09 13:14:30 vps.rancho systemd[30689]: [0;1;31m[0;1;39m[0;1;31mgunicorn.service: Failed at step USER spawning /home/gabriel/rancho/ranchoenv/bin/gunicorn: No such process[0m
+Oct 09 13:14:30 vps.rancho systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Main process exited, code=exited, status=217/USER[0m
+Oct 09 13:14:30 vps.rancho systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Failed with result 'exit-code'.[0m
+Oct 09 13:14:30 vps.rancho systemd[1]: Started gunicorn daemon.
+Oct 09 13:14:30 vps.rancho systemd[30691]: [0;1;31m[0;1;39m[0;1;31mgunicorn.service: Failed to determine user credentials: No such process[0m
+Oct 09 13:14:30 vps.rancho systemd[30691]: [0;1;31m[0;1;39m[0;1;31mgunicorn.service: Failed at step USER spawning /home/gabriel/rancho/ranchoenv/bin/gunicorn: No such process[0m
+Oct 09 13:14:30 vps.rancho systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Main process exited, code=exited, status=217/USER[0m
+Oct 09 13:14:30 vps.rancho systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Failed with result 'exit-code'.[0m
+Oct 09 13:14:30 vps.rancho systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Start request repeated too quickly.[0m
+Oct 09 13:14:30 vps.rancho systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Failed with result 'exit-code'.[0m
+Oct 09 13:14:30 vps.rancho systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start gunicorn daemon.[0m
+Oct 09 13:18:21 vps.rancho systemd[1]: Started gunicorn daemon.
+Oct 09 13:18:21 vps.rancho gunicorn[30767]: [2022-10-09 13:18:21 +0000] [30767] [INFO] Starting gunicorn 20.1.0
+Oct 09 13:18:21 vps.rancho gunicorn[30767]: [2022-10-09 13:18:21 +0000] [30767] [INFO] Listening at: unix:/run/gunicorn.sock (30767)
+Oct 09 13:18:21 vps.rancho gunicorn[30767]: [2022-10-09 13:18:21 +0000] [30767] [INFO] Using worker: sync
+Oct 09 13:18:21 vps.rancho gunicorn[30767]: [2022-10-09 13:18:21 +0000] [30768] [INFO] Booting worker with pid: 30768
+Oct 09 13:18:21 vps.rancho gunicorn[30767]: [2022-10-09 13:18:21 +0000] [30769] [INFO] Booting worker with pid: 30769
+Oct 09 13:18:21 vps.rancho gunicorn[30767]: [2022-10-09 13:18:21 +0000] [30770] [INFO] Booting worker with pid: 30770
+Oct 09 13:18:21 vps.rancho gunicorn[30767]:  - - [09/Oct/2022:13:18:21 +0000] "GET / HTTP/1.1" 200 10681 "-" "curl/7.58.0"
