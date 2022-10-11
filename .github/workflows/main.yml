@@ -1,3 +1,5 @@
+name: site
+
 on:
   push:
     branches: main
@@ -6,13 +8,24 @@ on:
 jobs:
   web-deploy:
     name: 🎉 Deploy
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.8, 3.9]
     defaults:
         run:
           shell: bash
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2
+      
+    - name: 📂 Coletar Static
+      run: |
+          source rancho/ranchoenv/bin/activate
+          pip install -r requirements.txt
+          python rancho/manage.py collectstatic
+          sudo systemctl restart gunicorn
     
     - name: 📂 Sync files
       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
@@ -24,15 +37,8 @@ jobs:
             sftp_only: true
             password: ${{ secrets.ftp_password }}
   
-    - name: 📂 Iniciar venv
-      run: source rancho/ranchoenv/bin/activate
-    - name: 📂 Instalar Pacotes
-      run: pip install -r requirements.txt
-    - name: 📂 Coletar Static
-      run: python rancho/manage.py collectstatic
-    - name: 📂 Recarregar Gunicorn
-      run: sudo systemctl restart gunicorn    
-      
+    
+
 
         
             
