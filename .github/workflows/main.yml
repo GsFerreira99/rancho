@@ -7,6 +7,9 @@ jobs:
   web-deploy:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
+    defaults:
+        run:
+          shell: bash
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2
@@ -20,11 +23,7 @@ jobs:
             remote_path: '/home/gabriel/rancho/'
             sftp_only: true
             password: ${{ secrets.ftp_password }}
-      
-  comandos:
-    name: 🎉 Carregar Static Files
-    runs-on: ubuntu-latest
-    steps:
+  
     - name: 📂 Iniciar venv
       run: source rancho/ranchoenv/bin/activate
     - name: 📂 Instalar Pacotes
@@ -32,7 +31,7 @@ jobs:
     - name: 📂 Coletar Static
       run: python rancho/manage.py collectstatic
     - name: 📂 Recarregar Gunicorn
-      run: sudo systemctl restart gunicorn
+      run: sudo systemctl restart gunicorn    
       
 
         
