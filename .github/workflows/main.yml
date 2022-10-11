@@ -1,4 +1,4 @@
-name: site
+name: Deploy
 
 on:
   push:
@@ -8,6 +8,9 @@ jobs:
   web-deploy:
     name: 🎉 Deploy
     runs-on: ubuntu-18.04
+    environment: 
+      name: production
+      url: https://ranchoalere.online
 
     steps:
     - name: 🚚 Get latest code
