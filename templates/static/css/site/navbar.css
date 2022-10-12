@@ -43,6 +43,8 @@
 .nav-mobile {
     display: none;
     width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-mobile--item {
@@ -60,11 +62,6 @@
     text-decoration: none;
     font-size: 0.7rem;
     font-weight: bold;
-}
-
-.nav-mobile {
-    margin: 0;
-    padding: 0;
 }
 
 .nav-contatos {
@@ -89,7 +86,11 @@
     text-decoration: none;
     display: flex;
     align-items: center;
-    font-size: 0.4rem;
+    font-size: 0.5rem;
+}
+
+.nav-contatos--item a:hover {
+    color: #b2b2b2;
 }
 
 .nav-contatos--item a img{
@@ -111,7 +112,7 @@
 @media (min-width:400px) {
 
     .nav-contatos--item a {
-        font-size: 0.55rem;
+        font-size: 0.7rem;
     }
 
 }
