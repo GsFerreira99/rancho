@@ -25,3 +25,9 @@ jobs:
             remote_path: '/home/gabriel/rancho/'
             sftp_only: true
             password: ${{ secrets.ftp_password }}
+<<<<<<< HEAD
+
+
+
+=======
+>>>>>>> a987f1935d8ecf0e73ab2d60b7645d82fdfc679f
