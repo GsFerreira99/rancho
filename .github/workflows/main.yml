@@ -1,3 +1,5 @@
+name: Deploy
+
 on:
   push:
     branches: main
@@ -5,11 +7,15 @@ on:
 jobs:
   web-deploy:
     name: 🎉 Deploy
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
+    environment: 
+      name: production
+      url: https://ranchoalere.online
+
     steps:
     - name: 🚚 Get latest code
-      uses: actions/checkout@v2
-
+      uses: actions/checkout@v2          
+    
     - name: 📂 Sync files
       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
       with:
@@ -19,6 +25,9 @@ jobs:
             remote_path: '/home/gabriel/rancho/'
             sftp_only: true
             password: ${{ secrets.ftp_password }}
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> a987f1935d8ecf0e73ab2d60b7645d82fdfc679f
