@@ -14,13 +14,15 @@
     height: auto;
     justify-content: center;
     flex-direction: column;
+    background: url("/static/img/leite-full.png") rgb(232, 232, 232) no-repeat bottom;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+
 }
 
 .linha-titulo {
     text-align: center;
-    font-weight: 500;
-    background-color: white;
-    font-size: 1.3rem;
+    font-weight: 600;
+    font-size: 1.7rem;
     margin-bottom: 4rem;
     position: relative;
 }
@@ -30,7 +32,7 @@
   content: " ";
   position: absolute;
   top: 0.65em;
-  width: 25vw;
+  width: 17vw;
   height: 0.05em;
   background-color: #049733;
 }
@@ -54,28 +56,37 @@
     margin-bottom: 3rem;
 }
 
+.linha-produtos-div {
+        width: 100%;
+    }
+
 .linha-produtos {
     display: flex;
     flex-wrap: wrap;
     margin: 0 2rem;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .linha-produtos--item p {
     text-align: center;
     font-size: 1.3rem;
     font-weight: 400;
+    color: #000920;
 }
 
+
 .linha-produtos--item img {
-    z-index: 2;
-    position: relative;
-    width: 50%;
+    width: 10rem;
     transition: width 0.3s;
 }
 
-.linha-produtos--item img:hover {
-    width: 60%;
+.linha-produtos--item img:hover{
+    width: 11rem;
+}
+
+.linha-produtos-div:hover p{
+    color: #009c2d;
+    font-weight: 600;
 }
 
 
@@ -92,6 +103,11 @@
         margin: 0 7rem;
     }
 
+    .linha-titulo::after,
+    .linha-titulo::before{
+      width: 30vw;
+    }
+
 }
 
 @media (min-width:850px) {
@@ -102,6 +118,11 @@
 
     .linha-produtos {
         height: 250px;
+    }
+
+    .linha-titulo::after,
+    .linha-titulo::before{
+      width: 35vw;
     }
 
 

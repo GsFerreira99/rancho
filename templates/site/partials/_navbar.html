@@ -3,11 +3,15 @@
 {% block css %}
     <script type="text/javascript">
         function Ocultar(el) {
-        var display = document.getElementById(el).style.display;
-        if(display === "none")
-            document.getElementById(el).style.display = 'block';
+
+        var element = document.getElementById(el)
+        if(element.style.maxHeight === '0px') {
+            element.style.maxHeight = '211px';
+            element.style.transition = 'max-height 0.25s ease-in';
+        }
         else
-            document.getElementById(el).style.display = 'none';
+            element.style.maxHeight = '0px';
+            element.style.transition = 'max-height 0.25s ease';
     }
     </script>
     <link rel="stylesheet" href="{% static 'css/site/navbar.css' %}">

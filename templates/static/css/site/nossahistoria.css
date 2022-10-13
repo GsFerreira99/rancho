@@ -1,0 +1,82 @@
+.historia {
+    background: url("/static/img/ban3.jpg") no-repeat 50% 0;
+    background-size: cover;
+}
+
+.historia-content {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 4rem 2rem;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.historia-imagem {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.historia-imagem img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+}
+
+.historia-texto {
+    width: 100%;
+    text-shadow: 2px 2px rgba(255, 255, 255, 0.5);
+}
+
+.historia-texto h2 {
+    font-weight: 700;
+}
+
+.historia-texto p {
+    font-weight: 600;
+}
+
+.separador-footer {
+    background: url("/static/img/Footer.png");
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-size: cover;
+}
+
+
+@media (min-width:600px) {
+
+    .historia {
+        padding: 4rem;
+    }
+}
+
+@media (min-width:700px) {
+
+    .historia {
+        padding: 10rem 6rem;
+    }
+}
+
+
+@media (min-width:900px) {
+
+    .historia {
+        padding: 7rem 8rem;
+    }
+
+    .historia-imagem {
+        width: 50%;
+    }
+
+    .historia-texto {
+        width: 45%;
+    }
+}
+
+@media (min-width:1400px) {
+
+    .historia {
+        padding: 10rem 15rem;
+    }
+}
