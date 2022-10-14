@@ -8,6 +8,7 @@ __pycache__/
 
 ranchoenv/
 .idea/
+media/
 
 # Distribution / packaging
 .Python

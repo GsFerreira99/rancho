@@ -9,20 +9,20 @@
 <section class="produto">
 
     <div class="produto-imagem ord display">
-        <img class="" alt="" src="{% static 'img/Iog-Natural-450G.png' %}">
+        <img class="" alt="" src="{{ produto.imagem.url }}">
     </div>
 
     <div class="produto-dec">
         <div  class="produto-item item-nav">
-        <h2 class="produto-titulo">Iogurte <span class="ativo">Natural</span></h2>
+        <h2 class="produto-titulo">{{ produto.p_nome }} <span class="ativo">{{ produto.s_nome }}</span></h2>
         <div class="produto-nav">
             <a class="item" href="{% url 'index' %}">Home</a>
             <p class="item"> > </p>
             <a class="item " href="{% url 'produtos' %}">Produtos</a>
             <p class="item"> > </p>
-            <a class="item " href="{% url 'produtos' %}">Iogurtes</a>
+            <a class="item " href="{% url 'linha' produto.linha %}">{{ produto.linha }}</a>
             <p class="item"> > </p>
-            <a class="ativo item " href="produtos/1">Iogurte Natural</a>
+            <a class="ativo item " href="{% url 'produto-detalhes' produto.linha produto.id %}">{{ produto.nome}}</a>
         </div>
 
         </div>
@@ -34,10 +34,7 @@
         <div class="produtos-item--descricao ord1">
             <h2 class="produto-titulo">Ingredientes</h2>
             <p class="produto-item--texto">
-                Leite pasteurizado, açúcar, preparado de maracujá (aromatizante, corante, açúcar, amido de milho),
-                fermento lácteo.
-                <br><br>
-                Porção de 200g (1 copo)
+                {{ produto.ingredientes }}
             </p>
 
             <h2 class="produto-titulo-bold">Informação Nutricional</h2>
@@ -53,43 +50,43 @@
                 <tbody>
                     <tr>
                         <td>Valor Energético</td>
-                        <td>180kcal=765kJ</td>
-                        <td>9%</td>
+                        <td>{{ produto.tabela.val_ener}}</td>
+                        <td>{{ produto.tabela.val_ener_vd}}</td>
                     </tr>
                     <tr>
                         <td>Carboidratos</td>
-                        <td>40,0 g</td>
-                        <td>10%</td>
+                        <td>{{ produto.tabela.val_carbo}}</td>
+                        <td>{{ produto.tabela.val_carbo_vd}}</td>
                     </tr>
                     <tr>
                         <td>Proteínas</td>
-                        <td>6,0 g</td>
-                        <td>12%</td>
+                        <td>{{ produto.tabela.val_prote}}</td>
+                        <td>{{ produto.tabela.val_prote_vd}}</td>
                     </tr>
                     <tr>
                         <td>Gorduras Totais</td>
-                        <td>2,0 g</td>
-                        <td>6%</td>
+                        <td>{{ produto.tabela.val_gtotal}}</td>
+                        <td>{{ produto.tabela.val_gtotal_vd}}</td>
                     </tr>
                     <tr>
                         <td>Gorduras Saturadas</td>
-                        <td>3,0 g</td>
-                        <td>12%</td>
+                        <td>{{ produto.tabela.val_gsatu}}</td>
+                        <td>{{ produto.tabela.val_gsatu_vd}}</td>
                     </tr>
                     <tr>
                         <td>Gordura Trans</td>
-                        <td>0,0 g</td>
-                        <td>--</td>
+                        <td>{{ produto.tabela.val_gtrans}}</td>
+                        <td>{{ produto.tabela.val_gtrans_vd}}</td>
                     </tr>
                     <tr>
                         <td>Fibra Alimentar</td>
-                        <td>0,0 mg</td>
-                        <td>0%</td>
+                        <td>{{ produto.tabela.val_fibra}}</td>
+                        <td>{{ produto.tabela.val_fibra_vd}}</td>
                     </tr>
                     <tr>
                         <td>Sódio</td>
-                        <td>10,0 mg</td>
-                        <td>8</td>
+                        <td>{{ produto.tabela.val_sodio}}</td>
+                        <td>{{ produto.tabela.val_sodio_vd}}</td>
                     </tr>
                 </tbody>
 
@@ -102,8 +99,7 @@
 
             <h2 class="produto-titulo-bold">Prazo de Validade</h2>
             <p class="produto-item--texto-bold">
-                Após aberto manter em geladeira devidamente tampado e consumir em até 5 dias. Mantenha resfriado de 0ºC
-                até 8ºC
+                {{ produto.validade }}
             </p>
         </div>
         </div>

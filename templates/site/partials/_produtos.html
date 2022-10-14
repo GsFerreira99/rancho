@@ -7,11 +7,17 @@
 
 <section class="produtos">
     <div class="produtos-head">
-        <h2 class="produtos-head--titulo">Produtos</h2>
+        <h2 class="produtos-head--titulo">{{ titulo }}</h2>
         <div class="produtos-head--nav">
             <a class="item" href="{% url 'index' %}">Home</a>
             <p class="item"> > </p>
-            <a class="ativo item " href={% url 'produtos' %}"">Produtos</a>
+            {% if titulo == 'Produtos' %}
+                <a class="ativo item " href="{% url 'produtos' %}">Produtos</a>
+            {% else %}
+                <a class="item " href="{% url 'produtos' %}">Produtos</a>
+                <p class="item"> > </p>
+                <a class="ativo item " href="{{ titulo }}">{{ titulo }}</a>
+            {% endif %}
         </div>
 
     </div>
@@ -19,84 +25,18 @@
 
     <div class="produtos-lista">
 
-        <div class="produtos-item">
-            <img class="produtos-item--imagem" src="{% static 'img/Iog-Natural-450G.png' %}" alt="">
-            <div class="produtos-item--descricao">
-                <p class="produtos-item--texto">Iogurte <span class="sabor">Natural</span></p>
-                <a class="produtos-item--link" href="/produtos/1">Conhecer Produto ></a>
+        {% for produto in produtos %}
+            <div class="produtos-item">
+                <img class="produtos-item--imagem" src="{{ produto.imagem.url }}" alt="">
+                <div class="produtos-item--descricao">
+                    <p class="produtos-item--texto">{{ produto.p_nome }} <span class="sabor">{{ produto.s_nome }}</span></p>
+                    <a class="produtos-item--link" href="{{ produto.linha }}/{{ produto.id }}">Conhecer Produto ></a>
+                </div>
             </div>
-        </div>
+        {% endfor %}
 
-        <div class="produtos-item">
-            <img class="produtos-item--imagem" src="{% static 'img/Iog-Natural-450G.png' %}" alt="">
-            <div class="produtos-item--descricao">
-                <p class="produtos-item--texto">Iogurte <span class="sabor">Natural</span></p>
-                <a class="produtos-item--link" href="/produtos/1">Conhecer Produto ></a>
-            </div>
-        </div>
-        <div class="produtos-item">
-            <img class="produtos-item--imagem" src="{% static 'img/Iog-Natural-450G.png' %}" alt="">
-            <div class="produtos-item--descricao">
-                <p class="produtos-item--texto">Iogurte <span class="sabor">Natural</span></p>
-                <a class="produtos-item--link" href="/produtos/1">Conhecer Produto ></a>
-            </div>
-        </div>
-        <div class="produtos-item">
-            <img class="produtos-item--imagem" src="{% static 'img/Iog-Natural-450G.png' %}" alt="">
-            <div class="produtos-item--descricao">
-                <p class="produtos-item--texto">Iogurte <span class="sabor">Natural</span></p>
-                <a class="produtos-item--link" href="/produtos/1">Conhecer Produto ></a>
-            </div>
-        </div>
-        <div class="produtos-item">
-            <img class="produtos-item--imagem" src="{% static 'img/Iog-Natural-450G.png' %}" alt="">
-            <div class="produtos-item--descricao">
-                <p class="produtos-item--texto">Iogurte <span class="sabor">Natural</span></p>
-                <a class="produtos-item--link" href="/produtos/1">Conhecer Produto ></a>
-            </div>
-        </div>
-        <div class="produtos-item">
-            <img class="produtos-item--imagem" src="{% static 'img/Iog-Natural-450G.png' %}" alt="">
-            <div class="produtos-item--descricao">
-                <p class="produtos-item--texto">Iogurte <span class="sabor">Natural</span></p>
-                <a class="produtos-item--link" href="/produtos/1">Conhecer Produto ></a>
-            </div>
-        </div>
-        <div class="produtos-item">
-            <img class="produtos-item--imagem" src="{% static 'img/Iog-Natural-450G.png' %}" alt="">
-            <div class="produtos-item--descricao">
-                <p class="produtos-item--texto">Iogurte <span class="sabor">Natural</span></p>
-                <a class="produtos-item--link" href="/produtos/1">Conhecer Produto ></a>
-            </div>
-        </div>
-        <div class="produtos-item">
-            <img class="produtos-item--imagem" src="{% static 'img/Iog-Natural-450G.png' %}" alt="">
-            <div class="produtos-item--descricao">
-                <p class="produtos-item--texto">Iogurte <span class="sabor">Natural</span></p>
-                <a class="produtos-item--link" href="/produtos/1">Conhecer Produto ></a>
-            </div>
-        </div>
-        <div class="produtos-item">
-            <img class="produtos-item--imagem" src="{% static 'img/Iog-Natural-450G.png' %}" alt="">
-            <div class="produtos-item--descricao">
-                <p class="produtos-item--texto">Iogurte <span class="sabor">Natural</span></p>
-                <a class="produtos-item--link" href="/produtos/1">Conhecer Produto ></a>
-            </div>
-        </div>
-        <div class="produtos-item">
-            <img class="produtos-item--imagem" src="{% static 'img/Iog-Natural-450G.png' %}" alt="">
-            <div class="produtos-item--descricao">
-                <p class="produtos-item--texto">Iogurte <span class="sabor">Natural</span></p>
-                <a class="produtos-item--link" href="/produtos/1">Conhecer Produto ></a>
-            </div>
-        </div>
-        <div class="produtos-item">
-            <img class="produtos-item--imagem" src="{% static 'img/Iog-Natural-450G.png' %}" alt="">
-            <div class="produtos-item--descricao">
-                <p class="produtos-item--texto">Iogurte <span class="sabor">Natural</span></p>
-                <a class="produtos-item--link" href="/produtos/1">Conhecer Produto ></a>
-            </div>
-        </div>
+
+
 
 
     </div>
