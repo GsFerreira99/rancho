@@ -11,7 +11,8 @@
         }
         else
             element.style.maxHeight = '0px';
-            element.style.transition = 'max-height 0.25s ease';
+            element.style.transition = 'max-height 0.25s ease-out';
+
     }
     </script>
     <link rel="stylesheet" href="{% static 'css/site/navbar.css' %}">
@@ -20,14 +21,14 @@
 <nav class="nav">
 
     <div class="nav-items">
-        <a class="nav-items--logo" href="">
+        <a class="nav-items--logo" href="{% url 'index' %}">
             <img class="nav-items--logo---img" src="{% static 'img/logo.png' %}" alt="logo rancho alere">
             <img class="nav-items--logo---img" src="{% static 'img/rancho-alere.png' %}" alt="rancho alere">
         </a>
 
         <ul class="nav-navbar">
-                    <li class="nav-navbar--item"><a class="navbar--item-link" href="">Início</a></li>
-                    <li class="nav-navbar--item"><a class="navbar--item-link" href="">Produtos</a></li>
+                    <li class="nav-navbar--item"><a class="navbar--item-link" href="{% url 'index' %}">Início</a></li>
+                    <li class="nav-navbar--item"><a class="navbar--item-link" href="{% url 'produtos' %}">Produtos</a></li>
                     <li class="nav-navbar--item"><a class="navbar--item-link" href="">Sobre Nós</a></li>
                     <li class="nav-navbar--item"><a class="navbar--item-link" href="">Contato</a></li>
         </ul>
@@ -41,8 +42,8 @@
     </div>
 
     <ul id="menu" class="nav-mobile">
-        <li class="nav-mobile--item"><a class="nav-mobile--item---link" href="">Início</a></li>
-        <li class="nav-mobile--item"><a class="nav-mobile--item---link" href="">Produtos</a></li>
+        <li class="nav-mobile--item"><a class="nav-mobile--item---link" href="{% url 'index' %}">Início</a></li>
+        <li class="nav-mobile--item"><a class="nav-mobile--item---link" href="{% url 'produtos' %}">Produtos</a></li>
         <li class="nav-mobile--item"><a class="nav-mobile--item---link" href="">Sobre Nós</a></li>
         <li class="nav-mobile--item"><a class="nav-mobile--item---link" href="">Contato</a></li>
     </ul>
