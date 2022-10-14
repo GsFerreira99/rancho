@@ -1,0 +1,191 @@
+.produto {
+    padding: 4rem 2rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.produto-item {
+    display: flex;
+    justify-content: start;
+    width: 100%;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.produto-imagem {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.produto-imagem img {
+    display: flex;
+    justify-content: start;
+    width: 60%;
+    margin-bottom: 2rem;
+}
+
+.ord {
+    order: 1;
+}
+
+.ord1 {
+    order: 2;
+}
+
+
+.produtos-item--descricao {
+    display: flex;
+    justify-content: start;
+}
+
+.produto-texto {
+    text-align: start;
+}
+
+.item-nav {
+    justify-content: start;
+}
+
+.produto-nav {
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.produto-nav a {
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.produto-item--texto {
+    text-align: justify;
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+}
+
+.produto-titulo {
+    color: #008325;
+    font-size: 1.4rem;
+    font-weight: 500;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.produto-titulo-bold {
+    color: #008325;
+    font-size: 1.4rem;
+    font-weight: 600;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.ativo {
+    font-weight: 700;
+}
+
+.tabela-nutricional {
+    border: 1px solid #008325;
+    border-radius: 10px;
+}
+
+.tabela-nutricional thead {
+    color: white;
+    font-size: 0.8rem;
+    background: #008325;
+}
+
+.tabela-nutricional thead tr th {
+    padding: 0.8rem 1rem;
+    text-align: start;
+}
+
+.tabela-nutricional tbody:nth-child(1) {
+    padding: 2rem;
+}
+
+.tabela-nutricional tbody tr td {
+    font-size: 0.6rem;
+    padding: 0.3rem 1rem;
+}
+
+.tabela-nutricional--info {
+    color: #85888C;
+    font-size: 0.8rem;
+    text-align: justify;
+    margin: 2rem 0;
+}
+
+.produto-item--texto-bold {
+    text-align: justify;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.produto-dec {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+ }
+
+.display {
+    display: none;
+}
+
+.display2 {
+    display: flex;
+}
+
+@media screen and (min-width: 425px) {
+    .produto {
+        padding: 4rem 3rem;
+    }
+
+    .produto-imagem img {
+        width: 40%;
+    }
+}
+
+@media screen and (min-width: 760px) {
+    .produto-dec {
+        width: 50%;
+     }
+
+    .display {
+        display: flex;
+    }
+
+    .display2 {
+        display: none;
+    }
+
+    .produto {
+        padding: 8rem 10rem;
+        align-items: start;
+    }
+
+    .produto-imagem {
+        width: 50%;
+    }
+
+    .produto-it {
+        width: 50%;
+    }
+
+    .ord {
+        order: 0;
+    }
+
+    .produto-imagem img {
+        width: 70%;
+    }
+}
