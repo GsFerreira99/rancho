@@ -41,7 +41,7 @@ class Linha(models.Model):
 
 class Produto(models.Model):
     nome = models.CharField(max_length=255)
-    imagem = models.ImageField()
+    imagem = models.ImageField(null=True)
     ingredientes = models.TextField()
     tabela_nutricional = models
     validade = models.TextField()
