@@ -52,7 +52,7 @@ class Produto(models.Model):
     def p_nome(self) -> str:
         nome = self.nome.split(' ')
         nome.pop(-1)
-        return ''.join(nome)
+        return ' '.join(nome)
 
     def s_nome(self) -> str:
         nome = self.nome.split(' ')

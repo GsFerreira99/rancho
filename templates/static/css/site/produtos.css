@@ -48,12 +48,15 @@
 
 .produtos-item--descricao {
     display: flex;
+    width: 130px;
+    min-width: 130px;
     flex-direction: column;
     justify-content: center;
 }
 
 .produtos-item--imagem {
     height: 10rem;
+    margin-right: 1rem;
  }
 
 .produtos-item--texto {
@@ -89,11 +92,11 @@
 
 @media screen and (min-width: 800px) {
     .produtos-item--imagem {
-        height: 13rem;
+        height: 10rem;
      }
 
     .produtos-item {
-        width: 30%;
+        width: 45%;
     }
 }
 
