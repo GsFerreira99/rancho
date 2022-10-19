@@ -4,7 +4,7 @@
     <script type="text/javascript">
         function Ocultar(el) {
 
-        var element = document.getElementById(el)
+        let element = document.getElementById(el)
         if(element.style.maxHeight === '0px') {
             element.style.maxHeight = '211px';
             element.style.transition = 'max-height 0.25s ease-in';
@@ -29,8 +29,8 @@
         <ul class="nav-navbar">
                     <li class="nav-navbar--item"><a class="navbar--item-link" href="{% url 'index' %}">Início</a></li>
                     <li class="nav-navbar--item"><a class="navbar--item-link" href="{% url 'produtos' %}">Produtos</a></li>
-                    <li class="nav-navbar--item"><a class="navbar--item-link" href="">Sobre Nós</a></li>
-                    <li class="nav-navbar--item"><a class="navbar--item-link" href="">Contato</a></li>
+                    <li class="nav-navbar--item"><a class="navbar--item-link" href="{% url 'sobre-nos' %}">Sobre Nós</a></li>
+                    <li class="nav-navbar--item"><a class="navbar--item-link" href="{% url 'contato' %}">Contato</a></li>
         </ul>
 
         <div class="nav-items--toggle">
@@ -44,14 +44,14 @@
     <ul id="menu" class="nav-mobile">
         <li class="nav-mobile--item"><a class="nav-mobile--item---link" href="{% url 'index' %}">Início</a></li>
         <li class="nav-mobile--item"><a class="nav-mobile--item---link" href="{% url 'produtos' %}">Produtos</a></li>
-        <li class="nav-mobile--item"><a class="nav-mobile--item---link" href="">Sobre Nós</a></li>
-        <li class="nav-mobile--item"><a class="nav-mobile--item---link" href="">Contato</a></li>
+        <li class="nav-mobile--item"><a class="nav-mobile--item---link" href="{% url 'sobre-nos' %}">Sobre Nós</a></li>
+        <li class="nav-mobile--item"><a class="nav-mobile--item---link" href="{% url 'contato' %}">Contato</a></li>
     </ul>
 
     <ul class="nav-contatos">
-        <li class="nav-contatos--item"><a href=""><img alt="" src="{% static 'img/email.svg' %}">contato@ranchoalere.online</a></li>
-        <li class="nav-contatos--item"><a href=""><img alt="" src="{% static 'img/loc.svg' %}">Parintins, Amazonas</a></li>
-        <li class="nav-contatos--item"><a href=""><img alt="" src="{% static 'img/tel.svg' %}">+55 92 99204-6774</a></li>
+        <li class="nav-contatos--item"><a target="_blank" href="mailto:ranchoalere@gmail.com"><img alt="" src="{% static 'img/email.svg' %}">ranchoalere@gmail.com</a></li>
+        <li class="nav-contatos--item"><a target="_blank" href="https://goo.gl/maps/G1zYyvPLpinoVKC16"><img alt="" src="{% static 'img/loc.svg' %}">Parintins, Amazonas</a></li>
+        <li class="nav-contatos--item"><a target="_blank" href="https://api.whatsapp.com/send?phone=5592992046774"><img alt="" src="{% static 'img/tel.svg' %}">+55 92 99204-6774</a></li>
     </ul>
 
     <span class="separador">

@@ -1,0 +1,52 @@
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/site/contato.css' %}">
+{% endblock %}
+
+
+<section class="contato">
+
+    <div>
+        <h2 class="contato-titulo">Contato</h2>
+        <p class="contato-texto">Se você tem alguma dúvida, reclamação ou sugestão, utilize os nossos canais de atendimento ou utilize o
+            formulário para enviar uma mensagem.</p>
+        <form class="contato-form" action="{% url 'contato' %}" method="POST">
+            {% csrf_token %}
+
+            <label class="contato-item">
+                Nome*
+                <input type="text" name="nome" >
+            </label>
+            <label class="contato-item">
+                Email*
+                <input type="email" name="email" >
+            </label>
+            <label class="contato-item">
+                Telefone (opcional)
+                <input type="text" name="telefone" >
+            </label>
+            <label class="contato-item">
+                Mensagem*
+                <textarea id="story" name="mensagem" rows="5">
+                </textarea>
+            </label>
+
+            <button class="contato-botao" type="submit">Enviar</button>
+
+        </form>
+    </div>
+
+    <iframe
+      width="100%"
+      class="contato-mapa"
+      height="300"
+      style="border:0"
+      loading="lazy"
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBJYBuzkL9fJ3O3SOwSzcIGZmcyufjG03U
+        &q=Rancho+Alere,Parintins+AM">
+    </iframe>
+
+</section>

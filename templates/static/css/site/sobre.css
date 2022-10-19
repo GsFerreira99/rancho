@@ -1,0 +1,52 @@
+.sobre{
+    padding: 5rem 2rem;
+}
+
+.sobre-conteudo{
+    display: flex;
+    flex-direction: column;
+}
+
+.sobre-titulo {
+    color: #008325;
+    font-weight: 700;
+    font-size: 1.9rem;
+    margin-bottom: 3rem;
+}
+
+.sobre-imagem{
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+
+    .sobre-titulo {
+        margin-bottom: 5rem;
+    }
+
+    .sobre{
+        padding: 5rem 7rem;
+    }
+
+    .sobre-conteudo{
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .sobre-texto {
+        width: 40%;
+    }
+
+    .sobre-imagem {
+        width: 400px;
+        height: 400px;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+
+    .sobre {
+        padding: 5rem 10rem;
+    }
+}

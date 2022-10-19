@@ -27,7 +27,11 @@
 
         {% for produto in produtos %}
             <div class="produtos-item">
-                <img class="produtos-item--imagem" src="{{ produto.imagem.url }}" alt="">
+                {% if not produto.imagem %}
+                    <img src="{% static 'img/sem-imagem.png' %}" alt="embalagem {{ produto.nome }}">
+                {% else %}
+                    <img class="produtos-item--imagem" src="{{ produto.imagem.url }}" alt="">
+                {% endif %}
                 <div class="produtos-item--descricao">
                     <p class="produtos-item--texto">{{ produto.p_nome }} <span class="sabor">{{ produto.s_nome }}</span></p>
                     <a class="produtos-item--link" href="{{ produto.linha }}/{{ produto.id }}">Conhecer Produto ></a>

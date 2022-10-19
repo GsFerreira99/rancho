@@ -33,6 +33,7 @@ class Tabela(models.Model):
 
 class Linha(models.Model):
     nome = models.CharField(max_length=255)
+    imagem = models.ImageField(null=True)
 
     def __str__(self) -> str:
         return self.nome

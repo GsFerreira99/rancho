@@ -11,10 +11,10 @@
 
     <div class="footer-content">
         <a class="footer-item" href="{% url 'index' %}"><img src="{% static 'img/rancho-alere.png' %}"></a>
-        <a class="footer-item" href=""><img src="{% static 'img/localizacao.png' %}"></a>
+        <a class="footer-item" href="{% url 'contato' %}"><img src="{% static 'img/localizacao.png' %}"></a>
         <div class="footer-items">
-            <a class="footer-item--mini" href=""><img src="{% static 'img/email2.png' %}"></a>
-            <a class="footer-item--mini" href=""><img src="{% static 'img/wpp.svg' %}"></a>
+            <a class="footer-item--mini" target="_blank" href="mailto:ranchoalere@gmail.com"><img src="{% static 'img/email2.png' %}"></a>
+            <a class="footer-item--mini" target="_blank" href="https://api.whatsapp.com/send?phone=5592992046774"><img src="{% static 'img/wpp.svg' %}"></a>
         </div>
 
     </div>

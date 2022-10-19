@@ -13,26 +13,18 @@
 
         <div class="linha-produtos">
 
-            <div class="linha-produtos-div">
-                <a href="produtos/Iogurte" class="linha-produtos--item">
-                <img src="{% static 'img/Iog-Natural-450G.png' %}" alt="garrafa de Iogurte">
-                <p>Iogurtes</p>
+            {% for linha in linhas %}
+                <div class="linha-produtos-div">
+                <a href="produtos/{{ linha.nome }}" class="linha-produtos--item">
+                    {% if not linha.imagem %}
+                        <img src="{% static 'img/sem-imagem.png' %}" alt="garrafa de Iogurte">
+                    {% else %}
+                        <img src="{{ linha.imagem.url }}" alt="garrafa de Iogurte">
+                    {% endif %}
+                <p>{{ linha.nome }}</p>
                 </a>
             </div>
-
-            <div class="linha-produtos-div">
-                <a href="produtos/Queijo Búfala" class="linha-produtos--item">
-                <img src="{% static 'img/Iog-Natural-450G.png' %}" alt="garrafa de Iogurte">
-                <p>Queijo Búfala</p>
-                </a>
-            </div>
-
-            <div class="linha-produtos-div">
-                <a href="produtos/Queijo Bovino" class="linha-produtos--item">
-                <img src="{% static 'img/Iog-Natural-450G.png' %}" alt="garrafa de Iogurte">
-                <p>Quejo Bovino</p>
-                </a>
-            </div>
+            {% endfor %}
         </div>
 
     </div>
