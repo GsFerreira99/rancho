@@ -9,7 +9,11 @@
 <section class="produto">
 
     <div class="produto-imagem ord display">
-        <img class="" alt="" src="{{ produto.imagem.url }}">
+        {% if not produto.imagem %}
+            <img src="{% static 'img/sem-imagem.png' %}" alt="embalagem {{ produto.nome }}">
+        {% else %}
+            <img class="" alt="embalagem {{ produto.nome }}" src="{{ produto.imagem.url }}">
+        {% endif %}
     </div>
 
     <div class="produto-dec">
@@ -28,7 +32,11 @@
         </div>
 
         <div class="produto-imagem ord display2">
-            <img class="" alt="" src="{% static 'img/Iog-Natural-450G.png' %}">
+            {% if not produto.imagem %}
+                <img src="{% static 'img/sem-imagem.png' %}" alt="embalagem {{ produto.nome }}">
+            {% else %}
+                <img class="" alt="embalagem {{ produto.nome }}" src="{{ produto.imagem.url }}">
+            {% endif %}
         </div>
 
         <div class="produtos-item--descricao ord1">
@@ -103,6 +111,5 @@
             </p>
         </div>
         </div>
-
 
 </section>
