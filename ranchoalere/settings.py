@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-zx-hkzz!_i&e$q!_2fs=qgc-n01fvpo^vwd_i9_c)@lwvccp5j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ranchoalere.online', '191.101.234.26', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['ranchoalere.com', '191.101.234.26', '127.0.0.1', '192.168.0.56',  'localhost']
 
 AUTH_USER_MODEL = "sistema.User"
 
@@ -94,8 +94,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'rancho',
         'USER': 'gabriel',
-        'PASSWORD': 'Gabriel151299',
-        'HOST': '127.0.0.1',
+        'PASSWORD': 'Gabriel@151299',
+        'HOST': '181.215.134.233',
         'PORT': '3306',
     }
 }

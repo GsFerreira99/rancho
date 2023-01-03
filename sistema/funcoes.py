@@ -27,15 +27,17 @@ def verificar_atraso(venda:object):
     else:
         return ''
 
-def calcular_mes(mes, val):
+def calcular_mes(mes, ano, val):
     mes = mes - val
     if mes <= 0:
         mes = mes + 12
-    return mes
+        ano -= 1
+    return ano, mes
 
 
 def periodos_data(periodo):
     hoje = datetime.date.today()
+    year = hoje.year
     if periodo == 'ultima_semana':
         return hoje - datetime.timedelta(7), hoje
     elif periodo == 'ultima_quinzena':
@@ -43,17 +45,18 @@ def periodos_data(periodo):
     elif periodo == 'mes_atual':
         return datetime.date(hoje.year, hoje.month, 1), hoje
     elif periodo == 'mes_anterior':
-        mes = calcular_mes(hoje.month, 1)
+        year, mes = calcular_mes(hoje.month, year, 1)
         day = monthrange(hoje.year, mes)[1]
-        return datetime.date(hoje.year, mes, 1), datetime.date(hoje.year, mes, day)
+        return datetime.date(year, mes, 1), datetime.date(year, mes, day)
     elif periodo == 'ultimo_trimestre':
-        mes = calcular_mes(hoje.month, 2)
-        return datetime.date(hoje.year, mes, 1), datetime.date(hoje.year, hoje.month, hoje.day)
+        year, mes = calcular_mes(hoje.month, year, 2)
+        return datetime.date(year, mes, 1), datetime.date(hoje.year, hoje.month, hoje.day)
     elif periodo == 'ultimo_semestre':
-        mes = calcular_mes(hoje.month, 5)
-        return datetime.date(hoje.year, mes, 1), datetime.date(hoje.year, hoje.month, hoje.day)
+        year, mes = calcular_mes(hoje.month, year, 5)
+        return datetime.date(year, mes, 1), datetime.date(hoje.year, hoje.month, hoje.day)
     elif periodo == 'ultimo_ano':
-        return datetime.date(hoje.year, 1, 1), datetime.date(hoje.year, hoje.month, hoje.day)
+        year, mes = calcular_mes(hoje.month, year, 12)
+        return datetime.date(year, 1, 1), datetime.date(hoje.year, hoje.month, hoje.day)
 
 
 
@@ -65,7 +68,7 @@ def total_vendas_ultimos_meses(meses: int):
     for i in range(meses):
         lista.append({'mes': nome_mes(mes), 'total': vendas_total_mes([data_inicio(ano, mes), data_fim(ano, mes)]),
                       'cor': '#0e0dcf'})
-        mes = calcular_mes(mes, 1)
+        ano, mes = calcular_mes(mes, ano, 1)
     return lista
 
 def nome_mes(mes):
