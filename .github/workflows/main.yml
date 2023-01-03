@@ -19,9 +19,9 @@ jobs:
     - name: 📂 Sync files
       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
       with:
-            username: 'rancho'
-            server: 'ranchoalere.com'
-            port: '21'
-            remote_path: '/home/rancho/sistemas/rancho/'
+            username: rancho
+            server: ranchoalere.com
+            port: 22
+            remote_path: /home/rancho/sistemas/rancho/
             sftp_only: true
-            password: 'Gabriel151299'
+            password: Gabriel151299
