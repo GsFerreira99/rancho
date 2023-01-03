@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-18.04
     environment: 
       name: production
-      url: https://ranchoalere.online
+      url: https://ranchoalere.com
 
     steps:
     - name: 🚚 Get latest code
@@ -22,6 +22,6 @@ jobs:
             username: ${{ secrets.ftp_username }}
             server: ${{ secrets.ftp_host }}
             port: ${{ secrets.ftp_port }}
-            remote_path: '/home/gabriel/rancho/'
+            remote_path: '/home/rancho/sistemas/rancho/'
             sftp_only: true
             password: ${{ secrets.ftp_password }}
