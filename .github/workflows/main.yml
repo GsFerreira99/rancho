@@ -19,11 +19,6 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        source /sistemas/rancho/venv/bin/activate
-        python -m pip install --upgrade pip
-        pip install -r /home/rancho/sistemas/rancho/rancho/requirements.txt
-        python manage.py migrate
-        python manage.py collectstatic
         sudo systemctl restart gunicorn
         sudo systemctl daemon-reload
         sudo systemctl restart gunicorn.socket gunicorn.service
