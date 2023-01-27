@@ -38,7 +38,7 @@ jobs:
             username: rancho
             server: ranchoalere.com
             port: 22
-            remote_path: /home/rancho/sistemas/rancho/rancho/
+            remote_path: /home/rancho/sistemas/rancho/
             sftp_only: true
             password: Gabriel151299
 
