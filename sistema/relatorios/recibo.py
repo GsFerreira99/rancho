@@ -16,6 +16,7 @@ class Recibo(Pdf):
         self.cliente()
         self.data()
         self.items_venda()
+        self.pix()
         self.total()
 
     def items_venda(self) -> None:
@@ -64,6 +65,11 @@ class Recibo(Pdf):
         self.can.setFontSize(size=12)
         self.can.drawString(380, 780, f'NOTA DE ENTREGA Nº {self.model}')
         self.can.drawString(380, 400, f'NOTA DE ENTREGA Nº {self.model}')
+
+    def pix(self) -> None:
+        self.can.setFontSize(size=10)
+        self.can.drawString(50, 445, f'PIX PARA PAGAMENTO: +55 92 99445-6701  - SILVANIA MONTEIRO BABA')
+        self.can.drawString(50, 55, f'PIX PARA PAGAMENTO: +55 92 99445-6701  - SILVANIA MONTEIRO BABA')
 
     def salvar(self) -> None:
         self.can.save()

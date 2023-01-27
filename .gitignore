@@ -9,6 +9,7 @@ __pycache__/
 ranchoenv/
 .idea/
 media/
+static/
 
 # Distribution / packaging
 .Python
@@ -135,3 +136,5 @@ dmypy.json
 =======
 .pyre/
 >>>>>>> 1b63f10 (Initial commit)
+/static/
+/static/

@@ -24,9 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-zx-hkzz!_i&e$q!_2fs=qgc-n01fvpo^vwd_i9_c)@lwvccp5j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['ranchoalere.com', '191.101.234.26', '127.0.0.1', '192.168.0.56',  'localhost']
+#ALLOWED_HOSTS = ['ranchoalere.com', '191.101.234.26', '127.0.0.1', '192.168.0.56',  'localhost']
+ALLOWED_HOSTS = ['ranchoalere.com', '181.215.134.233', '127.0.0.1', 'localhost']
 
 AUTH_USER_MODEL = "sistema.User"
 

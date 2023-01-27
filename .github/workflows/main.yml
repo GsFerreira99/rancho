@@ -14,14 +14,33 @@ jobs:
 
     steps:
     - name: 🚚 Get latest code
-      uses: actions/checkout@v2          
+      uses: actions/checkout@v2
+
+    - name: Install Dependencies
+      run: |
+        source sistemas/rancho/venv/bin/activate
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
     
     - name: 📂 Sync files
       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      run: |
+        source /home/rancho/sistemas/rancho/venv/bin/activate
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        python manage.py migrate
+        python manage.py collectstatic
+        sudo systemctl restart gunicorn
+        sudo systemctl daemon-reload
+        sudo systemctl restart gunicorn.socket gunicorn.service
+        sudo nginx -t && sudo systemctl restart nginx
       with:
             username: rancho
             server: ranchoalere.com
             port: 22
-            remote_path: /home/rancho/sistemas/rancho/
+            remote_path: /home/rancho/sistemas/rancho/rancho/
             sftp_only: true
             password: Gabriel151299
+
+          
+      
