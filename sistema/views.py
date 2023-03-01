@@ -682,7 +682,10 @@ class vendas(LoginRequiredMixin, View):
                 "filtro": 'Filtro: mês atual',
                 'hoje': datetime.now().date()
             }
-        self.filtrar(request, context)
+        try:
+            self.filtrar(request, context)
+        except:
+            pass
         return render(request, 'vendas/vendas.html', context)
 
     def post(self, request):
@@ -783,44 +786,6 @@ class vendas(LoginRequiredMixin, View):
             return redirect('vendas')
 
         elif request.POST.get('filtro', False) == 'filtro':
-            """context['status_venda'] = False
-            request.session['filtro'] = {
-                "status": request.POST.get('status'),
-                "periodos": request.POST.get('periodos'),
-                "data_inicio": request.POST.get('data_inicio'),
-                'data_fim': request.POST.get('data_fim'),
-            }
-            if request.POST.get('status') != '' and request.POST.get('status') != 'Vencido':
-                status_post = True
-            elif request.POST.get('status') != '' and request.POST.get('status') == 'Vencido':
-                status_post = 'Vencido'
-            else:
-                status_post = False
-
-            data_inicio = request.POST.get('data_inicio')
-            data_fim = request.POST.get('data_fim')
-
-            if request.POST.get('periodos') != '':
-                data_inicio, data_fim = periodos_data(request.POST.get('periodos'))
-
-            if status_post is True:
-                try:
-                    context['vendas'] = Venda.objects.filter(data__range=(data_inicio, data_fim),
-                                                             status = request.POST.get('status'))
-                except:
-                    pass
-            elif status_post == 'Vencido':
-                try:
-                    context['vendas'] = Venda.objects.filter(data__range=(data_inicio, data_fim),
-                                                             vencimento__lte=(datetime.now().date()), status='Em Aberto')
-                except:
-                    pass
-            else:
-                try:
-                    context['vendas'] = Venda.objects.filter(data__range=(data_inicio, data_fim))
-                except:
-                    pass"""
-
             request.session['status_venda'] = False
             request.session['status'] = request.POST.get('status')
             request.session['periodos'] = request.POST.get('periodos')
@@ -866,6 +831,10 @@ class vendas(LoginRequiredMixin, View):
                 pass
 
         context['filtro'] = f"Filtro: {data_inicio} à {data_fim}"
+        context["status"]=request.session['status']
+        context["periodos"]= request.session['periodos']
+        context["data_inicio"]= request.session['data_inicio']
+        context["data_fim"]= request.session['data_fim']
 
 def nfe(request, pk):
     hoje = date.today()
