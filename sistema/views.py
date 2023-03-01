@@ -675,11 +675,14 @@ class vendas(LoginRequiredMixin, View):
                 'data': '',
                 'faturamentoSelected': '',
                 'total': 0.00,
-                "status": request.POST.get('status'),
-                "periodos": request.POST.get('periodos'),
+                "status": request.session['status'],
+                "periodos": request.session['periodos'],
+                "data_inicio": request.session['data_inicio'],
+                'data_fim': request.session['data_fim'],
                 "filtro": 'Filtro: mês atual',
                 'hoje': datetime.now().date()
             }
+        self.filtrar(request, context)
         return render(request, 'vendas/vendas.html', context)
 
     def post(self, request):
@@ -709,6 +712,7 @@ class vendas(LoginRequiredMixin, View):
             }
 
         if request.POST.get('addProduto', False) == 'addProduto':
+            request.session['status_venda'] = True
             if request.POST.get('produto') != '':
                 produto = Estoque.objects.get(produto=Produto.objects.get(nome=request.POST.get('produto')))
                 valorVenda = produto.produto.valorVenda
@@ -774,10 +778,18 @@ class vendas(LoginRequiredMixin, View):
             else:
                 context['listaVenda'] = request.session['listaVenda']
                 context['total']= "{:.2f}".format(request.session['total'])
+                request.session['status_venda'] = True
                 messages.error(request, "Preencha os campos corretamente.")
             return redirect('vendas')
 
         elif request.POST.get('filtro', False) == 'filtro':
+            """context['status_venda'] = False
+            request.session['filtro'] = {
+                "status": request.POST.get('status'),
+                "periodos": request.POST.get('periodos'),
+                "data_inicio": request.POST.get('data_inicio'),
+                'data_fim': request.POST.get('data_fim'),
+            }
             if request.POST.get('status') != '' and request.POST.get('status') != 'Vencido':
                 status_post = True
             elif request.POST.get('status') != '' and request.POST.get('status') == 'Vencido':
@@ -807,14 +819,53 @@ class vendas(LoginRequiredMixin, View):
                 try:
                     context['vendas'] = Venda.objects.filter(data__range=(data_inicio, data_fim))
                 except:
-                    pass
-            
-            
-            context['filtro'] = f"Filtro: {data_inicio} à {data_fim}"
+                    pass"""
+
+            request.session['status_venda'] = False
+            request.session['status'] = request.POST.get('status')
+            request.session['periodos'] = request.POST.get('periodos')
+            request.session['data_inicio'] = request.POST.get('data_inicio')
+            request.session['data_fim'] = request.POST.get('data_fim')
+
+            self.filtrar(request, context)
             return render(request, 'vendas/vendas.html', context)
 
         return redirect('vendas')
 
+    def filtrar(self, request, context):
+
+        if request.session['status'] != '' and request.session['status'] != 'Vencido':
+            status_post = True
+        elif request.session['status']  != '' and request.session['status']  == 'Vencido':
+            status_post = 'Vencido'
+        else:
+            status_post = False
+
+        data_inicio = request.session['data_inicio']
+        data_fim = request.session['data_fim']
+
+        if request.session['periodos'] != '':
+            data_inicio, data_fim = periodos_data(request.session['periodos'])
+
+        if status_post is True:
+            try:
+                context['vendas'] = Venda.objects.filter(data__range=(data_inicio, data_fim),
+                                                         status=request.session['status'])
+            except:
+                pass
+        elif status_post == 'Vencido':
+            try:
+                context['vendas'] = Venda.objects.filter(data__range=(data_inicio, data_fim),
+                                                         vencimento__lte=(datetime.now().date()), status='Em Aberto')
+            except:
+                pass
+        else:
+            try:
+                context['vendas'] = Venda.objects.filter(data__range=(data_inicio, data_fim))
+            except:
+                pass
+
+        context['filtro'] = f"Filtro: {data_inicio} à {data_fim}"
 
 def nfe(request, pk):
     hoje = date.today()
