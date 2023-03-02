@@ -675,13 +675,20 @@ class vendas(LoginRequiredMixin, View):
                 'data': '',
                 'faturamentoSelected': '',
                 'total': 0.00,
-                "status": request.session['status'],
-                "periodos": request.session['periodos'],
-                "data_inicio": request.session['data_inicio'],
-                'data_fim': request.session['data_fim'],
                 "filtro": 'Filtro: mês atual',
                 'hoje': datetime.now().date()
             }
+        try:
+            context["status"] = request.session['status']
+            context["periodos"] = request.session['periodos']
+            context["data_inicio"] = request.session['data_inicio']
+            context["data_fim"] = request.session['data_fim']
+        except:
+            context["status"] = ''
+            context["periodos"] = ''
+            context["data_inicio"] = ''
+            context["data_fim"] = ''
+
         try:
             self.filtrar(request, context)
         except:
@@ -689,6 +696,8 @@ class vendas(LoginRequiredMixin, View):
         return render(request, 'vendas/vendas.html', context)
 
     def post(self, request):
+        if 'status' not in request.session:
+            request.session['status'] = ''
         if 'listaVenda' not in request.session:
             request.session['listaVenda'] = {}
         if 'contador' not in request.session:
