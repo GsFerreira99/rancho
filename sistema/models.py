@@ -162,7 +162,7 @@ class Venda(models.Model):
         return str(self.id)
 
 class ItemVenda(models.Model):
-    venda = models.ForeignKey(Venda, on_delete=models.DO_NOTHING, default=1)
+    venda = models.ForeignKey(Venda, on_delete=models.CASCADE, default=1)
     unidade = models.CharField(max_length=20, default='KG')
     produto = models.ForeignKey(Produto, on_delete=models.DO_NOTHING, blank=False)
     valor = models.FloatField(default=0)
@@ -185,5 +185,3 @@ class EmbalagemProducaoQueijo(models.Model):
     embalagem = models.ForeignKey(Estoque, on_delete=models.CASCADE, default=1, related_name='embalagem')
     rotulo = models.ForeignKey(Estoque, on_delete=models.CASCADE, default=1, related_name='rotulo')
     quantidade = models.IntegerField(default=1)
-
-

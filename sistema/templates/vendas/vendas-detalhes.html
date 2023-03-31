@@ -65,6 +65,12 @@
                                 <option>Emitir Nota</option>
                             {%endif%}
 
+                            {%if venda.status == 'Cancelado'%}
+                                <option selected>Cancelado</option>
+                            {%else%}
+                                <option>Cancelado</option>
+                            {%endif%}
+
                             {%if venda.status == 'Em Aberto'%}
                                 <option selected>Em Aberto</option>
                             {%else%}

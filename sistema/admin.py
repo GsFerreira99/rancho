@@ -37,6 +37,7 @@ class CategoriaProdutoAdmin(admin.ModelAdmin):
 
 class EstoqueAdmin(admin.ModelAdmin):
     list_display = ('id', 'produto', 'unidade', 'quantidade')
+    list_editable = ('quantidade', )
 
 class ClienteAdmin(admin.ModelAdmin):
     list_display = ('id', 'content_object')

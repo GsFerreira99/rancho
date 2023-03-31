@@ -66,74 +66,6 @@ class home(LoginRequiredMixin, View):
             i.valor = i.quantidade * i.fornecedor.preco_leite
             i.save()
 
-        datas = datas_mes_atual()
-
-        hoje = date.today()
-
-        m900 = ItemVenda.objects.filter(~Q(venda_id=277), produto__nome='IOGURTE MORANGO 900G', venda__data__month=hoje.month,
-                                        venda__data__year=hoje.year)
-        m450 = ItemVenda.objects.filter(~Q(venda_id=277), produto__nome='IOGURTE MORANGO 450G', venda__data__month=hoje.month,
-                                        venda__data__year=hoje.year)
-        n900 = ItemVenda.objects.filter(~Q(venda_id=277), produto__nome='IOGURTE NATURAL 900G', venda__data__month=hoje.month,
-                                        venda__data__year=hoje.year)
-        n450 = ItemVenda.objects.filter(~Q(venda_id=277), produto__nome='IOGURTE NATURAL 450G', venda__data__month=hoje.month,
-                                        venda__data__year=hoje.year)
-        ma900 = ItemVenda.objects.filter(~Q(venda_id=277), produto__nome='IOGURTE MARACUJÁ 900G', venda__data__month=hoje.month,
-                                         venda__data__year=hoje.year)
-        ma450 = ItemVenda.objects.filter(~Q(venda_id=277), produto__nome='IOGURTE MARACUJÁ 450G', venda__data__month=hoje.month,
-                                         venda__data__year=hoje.year)
-
-        tm900 = 0
-        for i in m900:
-            tm900 += i.quantidade
-
-        tm450 = 0
-        for i in m450:
-            tm450 += i.quantidade
-
-        tn900 = 0
-        for i in n900:
-            tn900 += i.quantidade
-
-        tn450 = 0
-        for i in n450:
-            tn450 += i.quantidade
-
-        tma900 = 0
-        for i in ma900:
-            tma900 += i.quantidade
-
-        tma450 = 0
-        for i in ma450:
-            tma450 += i.quantidade
-
-
-
-        #print(f"MORANGO 900: {tm900} --- 450: {tm450}")
-        #print(f"NATURAL 900: {tn900} --- 450: {tn450}")
-        #print(f"MARACUJÁ 900: {tma900} --- 450: {tma450}")
-
-
-        produtos = Produto.objects.filter(categoria=1)
-        #print(produtos)
-        hoje = date.today()
-        items = ItemVenda.objects.filter(venda__data__month=hoje.month)
-        #print(items)
-
-        p = {}
-        for i in produtos:
-            p[i.nome] = []
-
-        total = 0
-        for i in items:
-            p[i.produto.nome].append(i.quantidade)
-            total+= i.total
-
-        for i, j in p.items():
-            if sum(j) != 0:
-                #print("{} = {:.2f}kg --- rótulos = {:.2f}".format(i, sum(j), int(sum(j)*4)))
-                pass
-
         hoje = date.today()
 
         estoques = Estoque.objects.filter(produto__categoria__id=1).order_by('-quantidade')
@@ -157,7 +89,7 @@ class home(LoginRequiredMixin, View):
             except:
                 pass
         try:
-           v =  int(Venda.objects.filter(data__year=hoje.year, data__month=hoje.month).aggregate(Sum(
+           v = int(Venda.objects.filter(data__year=hoje.year, data__month=hoje.month).aggregate(Sum(
                 'total'))['total__sum'])
         except:
             v=0
@@ -663,7 +595,7 @@ class vendas(LoginRequiredMixin, View):
 
         datas = datas_mes_atual()
 
-        ObjVendas =  Venda.objects.filter(data__range=(datas[0], datas[1]))
+        ObjVendas = Venda.objects.filter(data__range=(datas[0], datas[1]))
 
         context = {
                 'user' : request.user,
@@ -679,25 +611,12 @@ class vendas(LoginRequiredMixin, View):
                 'hoje': datetime.now().date()
             }
         try:
-            context["status"] = request.session['status']
-            context["periodos"] = request.session['periodos']
-            context["data_inicio"] = request.session['data_inicio']
-            context["data_fim"] = request.session['data_fim']
-        except:
-            context["status"] = ''
-            context["periodos"] = ''
-            context["data_inicio"] = ''
-            context["data_fim"] = ''
-
-        try:
             self.filtrar(request, context)
         except:
             pass
         return render(request, 'vendas/vendas.html', context)
 
     def post(self, request):
-        if 'status' not in request.session:
-            request.session['status'] = ''
         if 'listaVenda' not in request.session:
             request.session['listaVenda'] = {}
         if 'contador' not in request.session:
@@ -742,9 +661,11 @@ class vendas(LoginRequiredMixin, View):
                 messages.error(request, "Preencha os campos corretamente.")
             context['total']= "{:.2f}".format(request.session['total'])
             context['listaVenda'] = request.session['listaVenda']
+            context['status_venda'] = True
             return render(request, 'vendas/vendas.html', context)
 
         elif request.POST.get('salvarVenda', False) == 'salvarVenda':
+            context['status_venda'] = False
 
             if request.POST.get('cliente') != '' and request.POST.get('data') != '' and request.POST.get('faturamento') != '':
                 
@@ -795,6 +716,7 @@ class vendas(LoginRequiredMixin, View):
             return redirect('vendas')
 
         elif request.POST.get('filtro', False) == 'filtro':
+            context['status_venda'] = False
             request.session['status_venda'] = False
             request.session['status'] = request.POST.get('status')
             request.session['periodos'] = request.POST.get('periodos')

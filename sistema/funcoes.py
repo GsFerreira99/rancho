@@ -87,7 +87,7 @@ def gerar_cor_hex():
 
 def vendas_total_mes(datas: list):
     try:
-        return int(Venda.objects.filter(~Q(status='cancelado'), data__range=(datas[0], datas[1])).aggregate(
+        return int(Venda.objects.filter(~Q(status='Cancelado'), data__range=(datas[0], datas[1])).aggregate(
             Sum('total'))['total__sum'])
     except:
         return 0

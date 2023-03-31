@@ -161,7 +161,11 @@
 
         </div>
 
-        <div id="columnchart_values3"  class="box grafico">
+        {% if recebimentos is None %}
+            <div id=""  class="box grafico">
+        {% else %}
+            <div id="columnchart_values3"  class="box grafico">
+        {% endif %}
 
         </div>
 

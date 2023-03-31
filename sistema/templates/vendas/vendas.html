@@ -147,7 +147,10 @@
                             {%if venda.status == 'Pago'%}
                                 <td style="color:rgb(17, 201, 17); font-weight: 700;">{{venda.status}}</td>
                             {%elif venda.status == 'Emitir Nota'%}
+                                <td style="color:rgb(204,109,0); font-weight: 700;">{{venda.status}}</td>
+                            {%elif venda.status == 'Cancelado'%}
                                 <td style="color:rgb(255, 0, 0); font-weight: 700;">{{venda.status}}</td>
+
                             {%else%}
                                 <td style="color:rgb(0, 162, 255); font-weight: 700;">{{venda.status}}</td>
                             {%endif%}
@@ -174,7 +177,7 @@
 
         </div>
         
-        {%if session.status_venda == True%}
+        {%if status_venda == True%}
         <div id="myModal" style="display: block;" class="modal">
         {%else%}
         <div id="myModal" class="modal">
