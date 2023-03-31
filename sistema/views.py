@@ -89,7 +89,7 @@ class home(LoginRequiredMixin, View):
             except:
                 pass
         try:
-           v = int(Venda.objects.filter(data__year=hoje.year, data__month=hoje.month).aggregate(Sum(
+           v = int(Venda.objects.filter(~Q(status='Cancelado'), data__year=hoje.year, data__month=hoje.month).aggregate(Sum(
                 'total'))['total__sum'])
         except:
             v=0

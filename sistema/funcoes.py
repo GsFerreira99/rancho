@@ -95,7 +95,7 @@ def vendas_total_mes(datas: list):
 def vendas_status_mes():
     hoje = datetime.date.today()
     dados = {
-        'em_aberto': total_venda_status(hoje.year, hoje.month, 'Em Aberto'),
+        'em_aberto': total_venda_status(hoje.year, hoje.month, 'Em Aberto')-total_venda_vencido(hoje, 'Em Aberto'),
         'pago': total_venda_status(hoje.year, hoje.month, 'Pago'),
         'vencido': total_venda_vencido(hoje, 'Em Aberto')}
     return dados
